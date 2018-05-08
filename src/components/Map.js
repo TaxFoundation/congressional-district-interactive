@@ -41,6 +41,19 @@ class Map extends React.Component {
       );
     });
 
+    const states = feature(us, us.objects.states).features.map(d => {
+      return (
+        <path
+          key={`state-${d.id}`}
+          fill="none"
+          stroke="#fff"
+          strokeWidth="1"
+          strokeLinejoin="bevel"
+          d={path(d)}
+        />
+      );
+    });
+
     return (
       <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
         <defs>
@@ -50,6 +63,7 @@ class Map extends React.Component {
           <use xlinkHref="#land" />
         </clipPath>
         <g clipPath="url(#clip-land)">{districtShapes}</g>
+        <g>{states}</g>
       </svg>
     );
   }
