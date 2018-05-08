@@ -9,7 +9,7 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
 
-    this.scale = 800;
+    this.scale = 780;
     this.xScale = 600;
     this.yScale = 400;
     this.xScalar = this.xScale / 600;
@@ -23,28 +23,35 @@ class Map extends React.Component {
       .translate([this.xScale / 2, this.yScale / 2 - 25])
     );
 
-    const USFeatures = feature(
-      us,
-      us.objects.states
-    ).features;
-
     const districtsFeatures = feature(
       districts,
       districts.objects.districts
     ).features;
 
-    const states = USFeatures.map(d => {
+    const districtShapes = districtsFeatures.map(d => {
       return (
-        <path key={`state-${d.id}`} id={`state-${d.id}`} d={path(d)}></path>
+        <path
+          key={`district-${d.id}`}
+          id={`district-${d.id}`}
+          d={path(d)}
+          fill="#333333"
+          stroke="#ffffff"
+          strokeWidth="0.5"
+          strokeLinejoin="bevel"
+        />
       );
-    })
+    });
 
     return (
       <svg
         width="100%"
         viewBox={`0 0 ${this.xScale} ${this.yScale}`}
       >
-        <g>{states}</g>
+        <defs><path id="land" d={path(feature(us, us.objects.land))} /></defs>
+        <clipPath id="clip-land">
+          <use xlinkHref="#land"></use>
+        </clipPath>
+        <g clipPath="url(#clip-land)">{districtShapes}</g>
       </svg>
     );
   }
