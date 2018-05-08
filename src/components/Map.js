@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
+import { colorize } from '../helpers';
 import us from '../data/us.json';
 import districts from '../data/us-congress-113.json';
 
@@ -32,7 +33,7 @@ class Map extends React.Component {
           key={`district-${d.id}`}
           id={`district-${d.id}`}
           d={path(d)}
-          fill="#333333"
+          fill={colorize(Math.random(), [0, 1])}
           stroke="#ffffff"
           strokeWidth="0.5"
           strokeLinejoin="bevel"
