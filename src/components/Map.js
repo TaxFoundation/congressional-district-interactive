@@ -19,14 +19,12 @@ class Map extends React.Component {
   render() {
     const path = geoPath().projection(
       geoAlbersUsa()
-      .scale(this.scale)
-      .translate([this.xScale / 2, this.yScale / 2 - 25])
+        .scale(this.scale)
+        .translate([this.xScale / 2, this.yScale / 2 - 25])
     );
 
-    const districtsFeatures = feature(
-      districts,
-      districts.objects.districts
-    ).features;
+    const districtsFeatures = feature(districts, districts.objects.districts)
+      .features;
 
     const districtShapes = districtsFeatures.map(d => {
       return (
@@ -43,13 +41,12 @@ class Map extends React.Component {
     });
 
     return (
-      <svg
-        width="100%"
-        viewBox={`0 0 ${this.xScale} ${this.yScale}`}
-      >
-        <defs><path id="land" d={path(feature(us, us.objects.land))} /></defs>
+      <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+        <defs>
+          <path id="land" d={path(feature(us, us.objects.land))} />
+        </defs>
         <clipPath id="clip-land">
-          <use xlinkHref="#land"></use>
+          <use xlinkHref="#land" />
         </clipPath>
         <g clipPath="url(#clip-land)">{districtShapes}</g>
       </svg>
