@@ -64,6 +64,7 @@ class USMap extends React.Component {
           d={path(d)}
           fill="none"
           key={`state-${d.id}`}
+          onClick={e => this.props.updateActiveState(d.id)}
           stroke="#fff"
           strokeLinejoin="bevel"
           strokeWidth="1"

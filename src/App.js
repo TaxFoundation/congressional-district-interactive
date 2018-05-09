@@ -23,7 +23,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <USMap us={us} districts={districts} />
+          <USMap
+            us={us}
+            districts={districts}
+            updateActiveState={this.updateActiveState}
+          />
       </div>
     );
   }
