@@ -4,31 +4,10 @@ import us from './data/us.json';
 import districts from './data/us-congress-113.json';
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      activeState: null,
-    };
-
-    this.updateActiveState = this.updateActiveState.bind(this);
-  }
-
-  updateActiveState(id) {
-    id
-      ? this.setState({ activeState: id })
-      : this.setState({ activeState: null });
-  }
-
   render() {
     return (
       <div className="App">
-        <USMap
-          activeState={this.state.activeState}
-          us={us}
-          districts={districts}
-          updateActiveState={this.updateActiveState}
-        />
+        <USMap us={us} districts={districts} />
       </div>
     );
   }
