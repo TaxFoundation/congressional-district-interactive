@@ -1,10 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import { colorize } from '../helpers';
 import us from '../data/us.json';
 import districts from '../data/us-congress-113.json';
+
+const State = styled.path`
+  cursor: pointer;
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-linejoin: bevel;
+
+  &:hover {
+    fill: rgba(255, 255, 255, 0.3);
+    stroke-width: 2;
+  }
+`;
 
 class Map extends React.Component {
   constructor(props) {
@@ -30,26 +44,26 @@ class Map extends React.Component {
     const districtShapes = districtsFeatures.map(d => {
       return (
         <path
-          key={`district-${d.id}`}
-          id={`district-${d.id}`}
           d={path(d)}
           fill={colorize(Math.random(), [0, 1])}
+          id={`district-${d.id}`}
+          key={`district-${d.id}`}
           stroke="#ffffff"
-          strokeWidth="0.5"
           strokeLinejoin="bevel"
+          strokeWidth="0.5"
         />
       );
     });
 
     const states = feature(us, us.objects.states).features.map(d => {
       return (
-        <path
-          key={`state-${d.id}`}
-          fill="none"
-          stroke="#fff"
-          strokeWidth="1"
-          strokeLinejoin="bevel"
+        <State
           d={path(d)}
+          fill="none"
+          key={`state-${d.id}`}
+          stroke="#fff"
+          strokeLinejoin="bevel"
+          strokeWidth="1"
         />
       );
     });
