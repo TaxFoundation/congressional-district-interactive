@@ -20,7 +20,7 @@ const State = styled.path`
   }
 `;
 
-class Map extends React.Component {
+class USMap extends React.Component {
   constructor(props) {
     super(props);
 
@@ -83,4 +83,4 @@ class Map extends React.Component {
   }
 }
 
-export default Map;
+export default USMap;
