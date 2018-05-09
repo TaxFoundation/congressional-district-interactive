@@ -23,11 +23,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <USMap
-            us={us}
-            districts={districts}
-            updateActiveState={this.updateActiveState}
-          />
+        <USMap
+          activeState={this.state.activeState}
+          us={us}
+          districts={districts}
+          updateActiveState={this.updateActiveState}
+        />
       </div>
     );
   }

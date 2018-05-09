@@ -18,6 +18,14 @@ const State = styled.path`
   }
 `;
 
+const District = styled.path.attrs({
+  fill: props => (props.theColor ? props.theColor : '#333'),
+})`
+  ${props => (props.active ? null : 'display: none;')} stroke: #fff;
+  stroke-width: 0.5;
+  stroke-linejoin: bevel;
+`;
+
 class USMap extends React.Component {
   constructor(props) {
     super(props);
@@ -43,14 +51,12 @@ class USMap extends React.Component {
 
     const districtShapes = districtsFeatures.map(d => {
       return (
-        <path
+        <District
+          active={true}
           d={path(d)}
-          fill={colorize(Math.random(), [0, 1])}
+          theColor={colorize(Math.random(), [0, 1])}
           id={`district-${d.id}`}
           key={`district-${d.id}`}
-          stroke="#ffffff"
-          strokeLinejoin="bevel"
-          strokeWidth="0.5"
         />
       );
     });
@@ -62,12 +68,8 @@ class USMap extends React.Component {
       return (
         <State
           d={path(d)}
-          fill="none"
           key={`state-${d.id}`}
           onClick={e => this.props.updateActiveState(d.id)}
-          stroke="#fff"
-          strokeLinejoin="bevel"
-          strokeWidth="1"
         />
       );
     });
@@ -84,7 +86,7 @@ class USMap extends React.Component {
           <use xlinkHref="#land" />
         </clipPath>
         <g clipPath="url(#clip-land)">{districtShapes}</g>
-        <g>{states}</g>
+        {this.props.activeState ? null : <g>{states}</g>}
       </svg>
     );
   }
