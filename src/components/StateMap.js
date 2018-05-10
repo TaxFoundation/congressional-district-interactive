@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { geoMercator, geoPath } from 'd3-geo';
+import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import { colorize } from '../helpers';
 
@@ -73,10 +73,14 @@ class StateMap extends React.Component {
         geoMercator().fitSize([this.xScale, this.yScale], districtsFeatures)
       );
 
+      const altPath = geoPath().projection(
+        geoAlbersUsa().fitSize([this.xScale, this.yScale], districtsFeatures)
+      );
+
       const districtShapes = districtsFeatures.features.map(d => {
         return (
           <District
-            d={path(d)}
+            d={this.props.activeState === 2 || 15 ? altPath(d) : path(d)}
             theColor={colorize(Math.random(), [0, 1])}
             id={`district-detail-${d.properties.CD114FP}`}
             key={`district-detail-${d.properties.CD114FP}`}
