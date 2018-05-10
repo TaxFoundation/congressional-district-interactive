@@ -13,6 +13,13 @@ const District = styled.path.attrs({
   stroke-linejoin: bevel;
 `;
 
+const BG = styled.rect`
+  cursor: pointer;
+  fill: transparent;
+  height: ${props => props.height};
+  width: ${props => props.width};
+`;
+
 class StateMap extends React.Component {
   constructor(props) {
     super(props);
@@ -62,7 +69,6 @@ class StateMap extends React.Component {
       );
 
       const districtShapes = districtsFeatures.features.map(d => {
-        console.log(d);
         return (
           <District
             d={path(d)}
@@ -75,6 +81,11 @@ class StateMap extends React.Component {
 
       return (
         <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+          <BG
+            height={this.yScale}
+            width={this.xScale}
+            onClick={e => this.props.updateActiveState(null)}
+          />
           {districtShapes}
         </svg>
       );
