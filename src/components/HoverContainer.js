@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
 
-const StyledHoverContainer = styled.div`
-  background-color: #fff;
-  display: ${props => (props.active ? 'block' : 'none')};
-  position: fixed;
-  top: ${props => props.y}px;
-  width: 300px;
-  z-index: 100;
+const StyledHoverContainer = styled(ReactTooltip)`
+  background-color: #fff !important;
+  color: #333 !important;
+  max-width: 300px !important;
+
+  &.place-top {
+    &:after {
+      border-top-color: #fff !important;
+      border-top-style: solid !important;
+      border-top-width: 6px !important;
+    }
+  }
 `;
 
 const HoverContainer = props => {

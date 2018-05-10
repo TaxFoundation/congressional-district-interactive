@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
+import HoverContainer from './HoverContainer';
 import { colorize } from '../helpers';
 
 const District = styled.path.attrs({
@@ -80,6 +81,8 @@ class StateMap extends React.Component {
       const districtShapes = districtsFeatures.features.map(d => {
         return (
           <District
+            data-tip={`This is district ${d.properties.CD114FP}`}
+            data-for="statemap"
             d={this.props.activeState === 2 || 15 ? altPath(d) : path(d)}
             theColor={colorize(Math.random(), [0, 1])}
             id={`district-detail-${d.properties.CD114FP}`}
@@ -89,14 +92,19 @@ class StateMap extends React.Component {
       });
 
       return (
-        <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
-          <BG
-            height={this.yScale}
-            width={this.xScale}
-            onClick={e => this.props.updateActiveState(null)}
-          />
-          {districtShapes}
-        </svg>
+        <Fragment>
+          <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+            <BG
+              data-tip="Click to return to US Map"
+              data-for="statemap"
+              height={this.yScale}
+              width={this.xScale}
+              onClick={e => this.props.updateActiveState(null)}
+            />
+            {districtShapes}
+          </svg>
+          <HoverContainer id="statemap" />
+        </Fragment>
       );
     }
   }

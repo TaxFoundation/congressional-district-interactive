@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
+import HoverContainer from './HoverContainer';
 import { colorize } from '../helpers';
 
 const State = styled.path`
@@ -67,6 +68,8 @@ class USMap extends React.Component {
       return (
         <State
           d={path(d)}
+          data-tip={`This is state ${d.id}`}
+          data-for="usmap"
           key={`state-${d.id}`}
           onClick={e => {
             this.props.updateActiveState(d.id);
@@ -76,19 +79,22 @@ class USMap extends React.Component {
     });
 
     return (
-      <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
-        <defs>
-          <path
-            id="land"
-            d={path(feature(this.props.us, this.props.us.objects.land))}
-          />
-        </defs>
-        <clipPath id="clip-land">
-          <use xlinkHref="#land" />
-        </clipPath>
-        <g clipPath="url(#clip-land)">{districtShapes}</g>
-        <g>{states}</g>
-      </svg>
+      <Fragment>
+        <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+          <defs>
+            <path
+              id="land"
+              d={path(feature(this.props.us, this.props.us.objects.land))}
+            />
+          </defs>
+          <clipPath id="clip-land">
+            <use xlinkHref="#land" />
+          </clipPath>
+          <g clipPath="url(#clip-land)">{districtShapes}</g>
+          <g>{states}</g>
+        </svg>
+        <HoverContainer id="usmap" aria-haspopup="true" />
+      </Fragment>
     );
   }
 }
