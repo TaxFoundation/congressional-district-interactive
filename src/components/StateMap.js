@@ -83,7 +83,11 @@ class StateMap extends React.Component {
           <District
             data-tip={`This is district ${d.properties.CD114FP}`}
             data-for="statemap"
-            d={this.props.activeState === 2 || 15 ? altPath(d) : path(d)}
+            d={
+              this.props.activeState === 2 || this.props.activeState === 15
+                ? altPath(d)
+                : path(d)
+            }
             theColor={colorize(Math.random(), [0, 1])}
             id={`district-detail-${d.properties.CD114FP}`}
             key={`district-detail-${d.properties.CD114FP}`}
