@@ -27,7 +27,7 @@ const District = styled.path.attrs({
   stroke-linejoin: bevel;
 `;
 
-class USMap extends React.Component {
+class USMap extends Component {
   constructor(props) {
     super(props);
 
@@ -98,5 +98,11 @@ class USMap extends React.Component {
     );
   }
 }
+
+USMap.propTypes = {
+  us: PropTypes.object,
+  districts: PropTypes.object,
+  updateActiveState: PropTypes.func,
+};
 
 export default USMap;

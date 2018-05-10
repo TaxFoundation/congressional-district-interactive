@@ -26,7 +26,7 @@ const BG = styled.rect`
   width: ${props => props.width};
 `;
 
-class StateMap extends React.Component {
+class StateMap extends Component {
   constructor(props) {
     super(props);
 
@@ -113,5 +113,10 @@ class StateMap extends React.Component {
     }
   }
 }
+
+StateMap.propTypes = {
+  activeState: PropTypes.number,
+  updateActiveState: PropTypes.func,
+};
 
 export default StateMap;
