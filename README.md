@@ -12,3 +12,5 @@ mapshaper -i *.json -o format=topojson force
 ```
 
 Splitting directly to topojson does not create separate files, so you must first split to geojson and then convert to topojson. D3 expects WGS84 coordinate system, from which it will then apply whatever other projection (in this case, Mercator). Failing to project to WGS84 will result in computer generated art, not a map.
+
+For Alaska specifically, which was 1mb originally, it was simplified with the `-simplify 10%` argument in `mapshaper`.

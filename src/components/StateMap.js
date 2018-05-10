@@ -11,7 +11,7 @@ const District = styled.path.attrs({
 })`
   cursor: pointer;
   stroke: #fff;
-  stroke-width: 1;
+  stroke-width: 0.5;
   stroke-linejoin: bevel;
 
   &:hover {
