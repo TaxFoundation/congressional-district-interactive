@@ -8,9 +8,14 @@ import { colorize } from '../helpers';
 const District = styled.path.attrs({
   fill: props => (props.theColor ? props.theColor : '#333'),
 })`
+  cursor: pointer;
   stroke: #fff;
-  stroke-width: 0.5;
+  stroke-width: 1;
   stroke-linejoin: bevel;
+
+  &:hover {
+    stroke-width: 2;
+  }
 `;
 
 const BG = styled.rect`
