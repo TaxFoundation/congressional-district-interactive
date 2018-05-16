@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Navigation from './components/Navigation';
 import USMap from './components/USMap';
 import StateMap from './components/StateMap';
 import us from './data/us.json';
 import districts from './data/us-congress-113.json';
 import data from './data/data.json';
+
+const AppWrapper = styled.div`
+  margin: 0 auto;
+  max-width: 1024px;
+`;
 
 class App extends Component {
   constructor() {
@@ -42,7 +48,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <AppWrapper className="App">
         <Navigation
           values={this.state}
           updateBucket={this.updateBucket}
@@ -71,7 +77,7 @@ class App extends Component {
             updateActiveState={this.updateActiveState}
           />
         )}
-      </div>
+      </AppWrapper>
     );
   }
 }
