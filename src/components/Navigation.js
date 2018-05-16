@@ -65,7 +65,7 @@ const ChildrenSelection = props => {
           name="children-0"
           id="children-0"
           value="0"
-          checked={props.value === 0}
+          checked={+props.value === 0}
           onChange={e => props.update(e.target.value)}
         />
         <label htmlFor="children-0">No Children</label>
@@ -74,7 +74,7 @@ const ChildrenSelection = props => {
           name="children-1"
           id="children-1"
           value="1"
-          checked={props.value === 1}
+          checked={+props.value === 1}
           onChange={e => props.update(e.target.value)}
         />
         <label htmlFor="children-1">One Child</label>
@@ -83,7 +83,7 @@ const ChildrenSelection = props => {
           name="children-2"
           id="children-2"
           value="2"
-          checked={props.value === 2}
+          checked={+props.value === 2}
           onChange={e => props.update(e.target.value)}
         />
         <label htmlFor="children-2">Two Children</label>
