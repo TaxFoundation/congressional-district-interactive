@@ -63,9 +63,7 @@ class USMap extends Component {
           <District
             d={path(d)}
             theColor={
-              districtData
-                ? colorize(districtData, this.props.data.domain)
-                : null
+              districtData ? colorize(districtData, this.props.domain) : null
             }
             id={`district-${d.id}`}
             key={`district-${d.id}`}

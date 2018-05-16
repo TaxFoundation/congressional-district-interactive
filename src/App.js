@@ -12,13 +12,14 @@ class App extends Component {
 
     this.state = {
       activeState: null,
-      activeBucket: '30-75',
+      activeBucket: '75-150',
       activeStatus: 1,
       activeChildren: 2,
+      domain: [-5000, 5000],
     };
 
     this.updateActiveState = this.updateActiveState.bind(this);
-    this.updateIncome = this.updateIncome.bind(this);
+    this.updateBucket = this.updateBucket.bind(this);
     this.updateStatus = this.updateStatus.bind(this);
     this.updateChildren = this.updateChildren.bind(this);
   }
@@ -27,23 +28,24 @@ class App extends Component {
     this.setState({ activeState: id });
   }
 
-  updateIncome(income) {
-    this.setState({ income });
+  updateBucket(activeBucket) {
+    this.setState({ activeBucket });
   }
 
-  updateStatus(filingStatus) {
-    this.setState({ filingStatus });
+  updateStatus(activeStatus) {
+    this.setState({ activeStatus });
   }
 
-  updateChildren(children) {
-    this.setState({ children });
+  updateChildren(activeChildren) {
+    this.setState({ activeChildren });
   }
 
   render() {
     return (
       <div className="App">
         <Navigation
-          updateIncome={this.updateIncome}
+          values={this.state}
+          updateBucket={this.updateBucket}
           updateStatus={this.updateStatus}
           updateChildren={this.updateChildren}
         />
@@ -51,7 +53,7 @@ class App extends Component {
           <StateMap
             activeState={this.state.activeState}
             data={data[this.state.activeState]}
-            domain={data.domain}
+            domain={this.state.domain}
             activeBucket={this.state.activeBucket}
             activeStatus={this.state.activeStatus}
             activeChildren={this.state.activeChildren}
@@ -62,6 +64,7 @@ class App extends Component {
             us={us}
             districts={districts}
             data={data}
+            domain={this.state.domain}
             activeBucket={this.state.activeBucket}
             activeStatus={this.state.activeStatus}
             activeChildren={this.state.activeChildren}

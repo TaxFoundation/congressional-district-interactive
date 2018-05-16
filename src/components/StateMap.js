@@ -88,7 +88,13 @@ class StateMap extends Component {
 
           return (
             <District
-              data-tip={`This is district ${d.properties.CD114FP}`}
+              data-tip={`This is district ${
+                d.properties.CD114FP
+              }\r\nAverage Income is ${
+                districtData.i
+              }.\r\nAverage state taxes are ${districtData.s}\r\nAverage tax ${
+                districtData.t < 0 ? 'cut' : 'increase'
+              } is ${Math.abs(districtData.t)}`}
               data-for="statemap"
               d={
                 this.props.activeState === 2 || this.props.activeState === 15

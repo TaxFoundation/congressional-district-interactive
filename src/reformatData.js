@@ -10,13 +10,8 @@ const updateData = () => {
     const rawData = fs.readFileSync(input, 'utf8');
     const rawJson = d3Dsv.csvParse(rawData);
 
-    //find domain
-    const max = Math.max(...rawJson.map(d => Math.abs(d.taxDelta)));
-
     //create new structure
-    let newData = {
-      domain: [-max, max],
-    };
+    let newData = {};
     rawJson.forEach(r => {
       if (!newData[r.state]) newData[r.state] = {};
       if (!newData[r.state][r.district]) newData[r.state][r.district] = {};
