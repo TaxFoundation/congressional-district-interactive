@@ -17,13 +17,17 @@
     "topojson-client": "^3.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "concurrently -c \"magenta,cyan\" --names \"Data,React\" \"npm run watch-data\" \"react-scripts start\"",
+    "build": "npm run build-data && react-scripts build",
+    "build-data": "node ./src/reformatData.js",
+    "watch-data": "node ./src/reformatData.js --watch",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
+    "concurrently": "^3.5.1",
     "eslint": "^4.10.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-react": "^1.1.7",

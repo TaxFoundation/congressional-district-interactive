@@ -79,20 +79,34 @@ class StateMap extends Component {
       );
 
       const districtShapes = districtsFeatures.features.map(d => {
-        return (
-          <District
-            data-tip={`This is district ${d.properties.CD114FP}`}
-            data-for="statemap"
-            d={
-              this.props.activeState === 2 || this.props.activeState === 15
-                ? altPath(d)
-                : path(d)
-            }
-            theColor={colorize(Math.random(), [0, 1])}
-            id={`district-detail-${d.properties.CD114FP}`}
-            key={`district-detail-${d.properties.CD114FP}`}
-          />
-        );
+        const districtId = +d.properties.CD114FP;
+        const hash = `${this.props.activeBucket}${this.props.activeStatus}${
+          this.props.activeChildren
+        }`;
+        if (this.props.data[districtId]) {
+          const districtData = this.props.data[districtId][hash];
+
+          return (
+            <District
+              data-tip={`This is district ${d.properties.CD114FP}`}
+              data-for="statemap"
+              d={
+                this.props.activeState === 2 || this.props.activeState === 15
+                  ? altPath(d)
+                  : path(d)
+              }
+              theColor={
+                districtData
+                  ? colorize(districtData.t, this.props.domain)
+                  : null
+              }
+              id={`district-detail-${d.properties.CD114FP}`}
+              key={`district-detail-${d.properties.CD114FP}`}
+            />
+          );
+        } else {
+          return null;
+        }
       });
 
       return (

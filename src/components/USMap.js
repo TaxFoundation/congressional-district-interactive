@@ -51,14 +51,29 @@ class USMap extends Component {
     ).features;
 
     const districtShapes = districtsFeatures.map(d => {
-      return (
-        <District
-          d={path(d)}
-          theColor={colorize(Math.random(), [0, 1])}
-          id={`district-${d.id}`}
-          key={`district-${d.id}`}
-        />
-      );
+      const stateId = Math.floor(+d.id / 100);
+      const districtId = d.id % 100;
+      const hash = `${this.props.activeBucket}${this.props.activeStatus}${
+        this.props.activeChildren
+      }`;
+      let districtData;
+      if (this.props.data[stateId] && this.props.data[stateId][districtId]) {
+        districtData = this.props.data[stateId][districtId][hash].t;
+        return (
+          <District
+            d={path(d)}
+            theColor={
+              districtData
+                ? colorize(districtData, this.props.data.domain)
+                : null
+            }
+            id={`district-${d.id}`}
+            key={`district-${d.id}`}
+          />
+        );
+      } else {
+        return null;
+      }
     });
 
     const states = feature(

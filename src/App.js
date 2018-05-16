@@ -4,8 +4,7 @@ import USMap from './components/USMap';
 import StateMap from './components/StateMap';
 import us from './data/us.json';
 import districts from './data/us-congress-113.json';
-import { csvParse } from 'd3-dsv';
-import data from './data/data';
+import data from './data/data.json';
 
 class App extends Component {
   constructor() {
@@ -13,17 +12,15 @@ class App extends Component {
 
     this.state = {
       activeState: null,
-      income: '30-75',
-      filingStatus: 1,
-      children: 2,
+      activeBucket: '30-75',
+      activeStatus: 1,
+      activeChildren: 2,
     };
 
     this.updateActiveState = this.updateActiveState.bind(this);
     this.updateIncome = this.updateIncome.bind(this);
     this.updateStatus = this.updateStatus.bind(this);
     this.updateChildren = this.updateChildren.bind(this);
-
-    this.data = csvParse(data);
   }
 
   updateActiveState(id) {
@@ -53,13 +50,21 @@ class App extends Component {
         {this.state.activeState ? (
           <StateMap
             activeState={this.state.activeState}
+            data={data[this.state.activeState]}
+            domain={data.domain}
+            activeBucket={this.state.activeBucket}
+            activeStatus={this.state.activeStatus}
+            activeChildren={this.state.activeChildren}
             updateActiveState={this.updateActiveState}
           />
         ) : (
           <USMap
-            data={this.data}
             us={us}
             districts={districts}
+            data={data}
+            activeBucket={this.state.activeBucket}
+            activeStatus={this.state.activeStatus}
+            activeChildren={this.state.activeChildren}
             updateActiveState={this.updateActiveState}
           />
         )}
