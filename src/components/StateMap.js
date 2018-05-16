@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import HoverContainer from './HoverContainer';
+import DistrictHoverContent from './DistrictHoverContent';
 import { colorize } from '../helpers';
 
 const District = styled.path.attrs({
@@ -38,15 +39,29 @@ class StateMap extends Component {
 
     this.state = {
       stateData: null,
+      activeDistrict: null,
+      activeIncome: 0,
+      activeStateTax: 0,
+      activeTaxDelta: 0,
     };
 
     this.getStateData = this.getStateData.bind(this);
+    this.updateActiveDistrict = this.updateActiveDistrict.bind(this);
   }
 
   componentDidMount() {
     this.getStateData(this.props.activeState)
       .then(data => this.setState({ stateData: data }))
       .catch(err => console.log(err));
+  }
+
+  updateActiveDistrict(id, districtData) {
+    this.setState({
+      activeDistrict: id,
+      activeIncome: districtData.i,
+      activeStateTax: districtData.s,
+      activeTaxDelta: districtData.t,
+    });
   }
 
   async getStateData(stateId) {
@@ -88,13 +103,7 @@ class StateMap extends Component {
 
           return (
             <District
-              data-tip={`This is district ${
-                d.properties.CD114FP
-              }\r\nAverage Income is ${
-                districtData.i
-              }.\r\nAverage state taxes are ${districtData.s}\r\nAverage tax ${
-                districtData.t < 0 ? 'cut' : 'increase'
-              } is ${Math.abs(districtData.t)}`}
+              data-tip
               data-for="statemap"
               d={
                 this.props.activeState === 2 || this.props.activeState === 15
@@ -108,6 +117,9 @@ class StateMap extends Component {
               }
               id={`district-detail-${d.properties.CD114FP}`}
               key={`district-detail-${d.properties.CD114FP}`}
+              onMouseEnter={e =>
+                this.updateActiveDistrict(districtId, districtData)
+              }
             />
           );
         } else {
@@ -119,15 +131,29 @@ class StateMap extends Component {
         <Fragment>
           <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
             <BG
-              data-tip="Click to return to US Map"
-              data-for="statemap"
+              data-tip
+              data-for="goBack"
               height={this.yScale}
               width={this.xScale}
               onClick={e => this.props.updateActiveState(null)}
             />
             {districtShapes}
           </svg>
-          <HoverContainer id="statemap" />
+          <HoverContainer
+            id="statemap"
+            getContent={() => (
+              <DistrictHoverContent
+                name={this.state.activeDistrict}
+                income={this.state.activeIncome}
+                stateTax={this.state.activeStateTax}
+                taxDelta={this.state.activeTaxDelta}
+              />
+            )}
+          />
+          <HoverContainer
+            id="goBack"
+            getContent={() => <p>Click to return to US map.</p>}
+          />
         </Fragment>
       );
     }
