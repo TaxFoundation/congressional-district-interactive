@@ -15,7 +15,7 @@ class App extends Component {
       activeBucket: '75-150',
       activeStatus: 1,
       activeChildren: 2,
-      domain: [-5000, 5000],
+      domain: [-0.05, 0.05],
     };
 
     this.updateActiveState = this.updateActiveState.bind(this);

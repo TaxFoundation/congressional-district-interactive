@@ -103,7 +103,7 @@ class StateMap extends Component {
               }
               theColor={
                 districtData
-                  ? colorize(districtData.t, this.props.domain)
+                  ? colorize(districtData.t / districtData.i, this.props.domain)
                   : null
               }
               id={`district-detail-${d.properties.CD114FP}`}

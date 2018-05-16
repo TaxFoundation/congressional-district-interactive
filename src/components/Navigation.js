@@ -37,7 +37,7 @@ const StatusSelection = props => {
           name="single-status"
           id="single-status"
           value="0"
-          checked={props.value === 0}
+          checked={+props.value === 0}
           onChange={e => props.update(e.target.value)}
         />
         <label htmlFor="single-status">Filing Single</label>
@@ -46,7 +46,7 @@ const StatusSelection = props => {
           name="married-status"
           id="married-status"
           value="1"
-          checked={props.value === 1}
+          checked={+props.value === 1}
           onChange={e => props.update(e.target.value)}
         />
         <label htmlFor="married--status">Filing Jointly</label>

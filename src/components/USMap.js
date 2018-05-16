@@ -58,12 +58,14 @@ class USMap extends Component {
       }`;
       let districtData;
       if (this.props.data[stateId] && this.props.data[stateId][districtId]) {
-        districtData = this.props.data[stateId][districtId][hash].t;
+        districtData = this.props.data[stateId][districtId][hash];
         return (
           <District
             d={path(d)}
             theColor={
-              districtData ? colorize(districtData, this.props.domain) : null
+              districtData
+                ? colorize(districtData.t / districtData.i, this.props.domain)
+                : null
             }
             id={`district-${d.id}`}
             key={`district-${d.id}`}
