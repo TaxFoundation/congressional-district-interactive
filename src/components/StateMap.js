@@ -102,14 +102,20 @@ class StateMap extends Component {
 
           return (
             <District
-              data-tip={`<h3>${
-                districtId > 0 ? `District ${districtId}` : 'At-Large District'
-              }</h3>
-               <p>Average Income is ${formatter(districtData.i)}</p>
-    <p>Average state taxes paid is ${formatter(districtData.s)}</p>
-    <p>Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is ${formatter(
-                Math.abs(districtData.t)
-              )}</p>
+              data-tip={`
+                <h3>
+                  ${
+                    districtId > 0
+                      ? `District ${districtId}`
+                      : 'At-Large District'
+                  }
+                </h3>
+                <p>Average Income is ${formatter(districtData.i)}</p>
+                <p>Average state taxes paid is ${formatter(districtData.s)}</p>
+                <p>
+                  Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is
+                  ${formatter(Math.abs(districtData.t))}
+                </p>
               `}
               data-for="statemap"
               d={
