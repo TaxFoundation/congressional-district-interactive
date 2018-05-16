@@ -5,6 +5,6 @@ export const colorize = (value, domain) => {
   return chroma.scale('PiYG').domain(domain)(-value);
 };
 
-export const formatter = number => {
-  return format('$,')(number);
+export const formatter = (number, type) => {
+  return type === '$' ? format('$,')(number) : format('.1%')(number);
 };
