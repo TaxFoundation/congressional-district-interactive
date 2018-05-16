@@ -12,7 +12,7 @@ class App extends Component {
 
     this.state = {
       activeState: null,
-      activeBucket: '75-150',
+      activeBucket: '30-75',
       activeStatus: 1,
       activeChildren: 2,
       domain: [-0.05, 0.05],

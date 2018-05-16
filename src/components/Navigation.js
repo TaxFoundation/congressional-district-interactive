@@ -2,16 +2,43 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  border-bottom: 1px solid #333;
   display: grid;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  grid-gap: 1rem;
   grid-template: auto / repeat(3, 1fr);
-  justify-items: center;
+  justify-items: stretch;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const NavSectionHeading = styled.h2`
+  border-bottom: 1px dotted #333;
+  display: block;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  text-align: center;
+  width: 100%;
+`;
+
+const Select = styled.select`
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+`;
+
+const Radio = styled.div`
+  display: inline-block;
+  margin: 0 0.5rem;
 `;
 
 const BucketSeclection = props => {
   return (
     <div>
-      <p>Choose Income Level</p>
-      <select
+      <NavSectionHeading>Choose Income Level</NavSectionHeading>
+      <Select
         name="income"
         id="income"
         value={props.value}
@@ -22,7 +49,7 @@ const BucketSeclection = props => {
         <option value="75-150">$75k - $150k</option>
         <option value="150-500">$150k - $500k</option>
         <option value="500-inf">$500k and Up</option>
-      </select>
+      </Select>
     </div>
   );
 };
@@ -30,26 +57,30 @@ const BucketSeclection = props => {
 const StatusSelection = props => {
   return (
     <div>
-      <p>Choose Filing Status</p>
-      <div>
-        <input
-          type="radio"
-          name="single-status"
-          id="single-status"
-          value="0"
-          checked={+props.value === 0}
-          onChange={e => props.update(e.target.value)}
-        />
-        <label htmlFor="single-status">Filing Single</label>
-        <input
-          type="radio"
-          name="married-status"
-          id="married-status"
-          value="1"
-          checked={+props.value === 1}
-          onChange={e => props.update(e.target.value)}
-        />
-        <label htmlFor="married--status">Filing Jointly</label>
+      <NavSectionHeading>Choose Filing Status</NavSectionHeading>
+      <div style={{ textAlign: 'center' }}>
+        <Radio>
+          <input
+            type="radio"
+            name="single-status"
+            id="single-status"
+            value="0"
+            checked={+props.value === 0}
+            onChange={e => props.update(e.target.value)}
+          />
+          <label htmlFor="single-status">Filing Single</label>
+        </Radio>
+        <Radio>
+          <input
+            type="radio"
+            name="married-status"
+            id="married-status"
+            value="1"
+            checked={+props.value === 1}
+            onChange={e => props.update(e.target.value)}
+          />
+          <label htmlFor="married--status">Filing Jointly</label>
+        </Radio>
       </div>
     </div>
   );
@@ -58,35 +89,41 @@ const StatusSelection = props => {
 const ChildrenSelection = props => {
   return (
     <div>
-      <p>Choose Number of Children</p>
-      <div>
-        <input
-          type="radio"
-          name="children-0"
-          id="children-0"
-          value="0"
-          checked={+props.value === 0}
-          onChange={e => props.update(e.target.value)}
-        />
-        <label htmlFor="children-0">No Children</label>
-        <input
-          type="radio"
-          name="children-1"
-          id="children-1"
-          value="1"
-          checked={+props.value === 1}
-          onChange={e => props.update(e.target.value)}
-        />
-        <label htmlFor="children-1">One Child</label>
-        <input
-          type="radio"
-          name="children-2"
-          id="children-2"
-          value="2"
-          checked={+props.value === 2}
-          onChange={e => props.update(e.target.value)}
-        />
-        <label htmlFor="children-2">Two Children</label>
+      <NavSectionHeading>Choose Number of Children</NavSectionHeading>
+      <div style={{ textAlign: 'center' }}>
+        <Radio>
+          <input
+            type="radio"
+            name="children-0"
+            id="children-0"
+            value="0"
+            checked={+props.value === 0}
+            onChange={e => props.update(e.target.value)}
+          />
+          <label htmlFor="children-0">No Children</label>
+        </Radio>
+        <Radio>
+          <input
+            type="radio"
+            name="children-1"
+            id="children-1"
+            value="1"
+            checked={+props.value === 1}
+            onChange={e => props.update(e.target.value)}
+          />
+          <label htmlFor="children-1">One Child</label>
+        </Radio>
+        <Radio>
+          <input
+            type="radio"
+            name="children-2"
+            id="children-2"
+            value="2"
+            checked={+props.value === 2}
+            onChange={e => props.update(e.target.value)}
+          />
+          <label htmlFor="children-2">Two Children</label>
+        </Radio>
       </div>
     </div>
   );
