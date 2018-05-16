@@ -13,15 +13,16 @@ const updateData = () => {
     //create new structure
     let newData = {};
     rawJson.forEach(r => {
-      if (!newData[r.state]) newData[r.state] = {};
-      if (!newData[r.state][r.district]) newData[r.state][r.district] = {};
+      if (!newData[r.state_fips]) newData[r.state_fips] = {};
+      if (!newData[r.state_fips][r.district])
+        newData[r.state_fips][r.district] = {};
 
-      let hash = `${r.bucket}${r.status}${r.children}`;
-      if (!newData[r.state][r.district][hash]) {
-        newData[r.state][r.district][hash] = {
-          i: r.income,
-          s: r.stateTax,
-          t: r.taxDelta,
+      let hash = `${r.income}${r.filing_status}${r.child_dep}`;
+      if (!newData[r.state_fips][r.district][hash]) {
+        newData[r.state_fips][r.district][hash] = {
+          i: r.avg_income_ALL,
+          s: r.taxes_paid_ded,
+          t: r['current-law-tax'] - r['pre-tcja-tax'],
         };
       }
     });
