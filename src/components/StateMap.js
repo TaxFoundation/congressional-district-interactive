@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import HoverContainer from './HoverContainer';
-import DistrictHoverContent from './DistrictHoverContent';
-import { colorize } from '../helpers';
+import { colorize, formatter } from '../helpers';
 
 const District = styled.path.attrs({
   fill: props => (props.theColor ? props.theColor : '#333'),
@@ -103,7 +102,15 @@ class StateMap extends Component {
 
           return (
             <District
-              data-tip
+              data-tip={`<h3>${
+                districtId > 0 ? `District ${districtId}` : 'At-Large District'
+              }</h3>
+               <p>Average Income is ${formatter(districtData.i)}</p>
+    <p>Average state taxes paid is ${formatter(districtData.s)}</p>
+    <p>Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is ${formatter(
+                Math.abs(districtData.t)
+              )}</p>
+              `}
               data-for="statemap"
               d={
                 this.props.activeState === 2 || this.props.activeState === 15
@@ -117,9 +124,6 @@ class StateMap extends Component {
               }
               id={`district-detail-${d.properties.CD114FP}`}
               key={`district-detail-${d.properties.CD114FP}`}
-              onMouseEnter={e =>
-                this.updateActiveDistrict(districtId, districtData)
-              }
             />
           );
         } else {
@@ -139,17 +143,7 @@ class StateMap extends Component {
             />
             {districtShapes}
           </svg>
-          <HoverContainer
-            id="statemap"
-            getContent={() => (
-              <DistrictHoverContent
-                name={this.state.activeDistrict}
-                income={this.state.activeIncome}
-                stateTax={this.state.activeStateTax}
-                taxDelta={this.state.activeTaxDelta}
-              />
-            )}
-          />
+          <HoverContainer id="statemap" html={true} />
           <HoverContainer
             id="goBack"
             getContent={() => <p>Click to return to US map.</p>}
