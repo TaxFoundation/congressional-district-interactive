@@ -8,6 +8,7 @@ import districts from './data/us-congress-113.json';
 import data from './data/data.json';
 
 const AppWrapper = styled.div`
+  color: #333;
   margin: 0 auto;
   max-width: 1024px;
 `;
@@ -19,14 +20,12 @@ class App extends Component {
     this.state = {
       activeState: null,
       activeBucket: '30-75',
-      activeStatus: 1,
-      activeChildren: 2,
+      activeChildren: 1,
       domain: [-0.05, 0.05],
     };
 
     this.updateActiveState = this.updateActiveState.bind(this);
     this.updateBucket = this.updateBucket.bind(this);
-    this.updateStatus = this.updateStatus.bind(this);
     this.updateChildren = this.updateChildren.bind(this);
   }
 
@@ -36,10 +35,6 @@ class App extends Component {
 
   updateBucket(activeBucket) {
     this.setState({ activeBucket });
-  }
-
-  updateStatus(activeStatus) {
-    this.setState({ activeStatus });
   }
 
   updateChildren(activeChildren) {
@@ -52,7 +47,6 @@ class App extends Component {
         <Navigation
           values={this.state}
           updateBucket={this.updateBucket}
-          updateStatus={this.updateStatus}
           updateChildren={this.updateChildren}
         />
         {this.state.activeState ? (
@@ -61,7 +55,6 @@ class App extends Component {
             data={data[this.state.activeState]}
             domain={this.state.domain}
             activeBucket={this.state.activeBucket}
-            activeStatus={this.state.activeStatus}
             activeChildren={this.state.activeChildren}
             updateActiveState={this.updateActiveState}
           />
@@ -72,7 +65,6 @@ class App extends Component {
             data={data}
             domain={this.state.domain}
             activeBucket={this.state.activeBucket}
-            activeStatus={this.state.activeStatus}
             activeChildren={this.state.activeChildren}
             updateActiveState={this.updateActiveState}
           />

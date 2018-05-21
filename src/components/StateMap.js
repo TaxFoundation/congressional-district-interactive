@@ -94,9 +94,7 @@ class StateMap extends Component {
 
       const districtShapes = districtsFeatures.features.map(d => {
         const districtId = +d.properties.CD114FP;
-        const hash = `${this.props.activeBucket}${this.props.activeStatus}${
-          this.props.activeChildren
-        }`;
+        const hash = `${this.props.activeBucket}0${this.props.activeChildren}`;
         if (this.props.data[districtId]) {
           const districtData = this.props.data[districtId][hash];
 

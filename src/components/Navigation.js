@@ -7,7 +7,7 @@ const Container = styled.div`
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
   grid-gap: 1rem;
-  grid-template: auto / repeat(3, 1fr);
+  grid-template: auto / repeat(2, 1fr);
   justify-items: stretch;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
@@ -50,38 +50,6 @@ const BucketSeclection = props => {
         <option value="150-500">$150k - $500k</option>
         <option value="500-inf">$500k and Up</option>
       </Select>
-    </div>
-  );
-};
-
-const StatusSelection = props => {
-  return (
-    <div>
-      <NavSectionHeading>Choose Filing Status</NavSectionHeading>
-      <div style={{ textAlign: 'center' }}>
-        <Radio>
-          <input
-            type="radio"
-            name="single-status"
-            id="single-status"
-            value="0"
-            checked={+props.value === 0}
-            onChange={e => props.update(e.target.value)}
-          />
-          <label htmlFor="single-status">Filing Single</label>
-        </Radio>
-        <Radio>
-          <input
-            type="radio"
-            name="married-status"
-            id="married-status"
-            value="1"
-            checked={+props.value === 1}
-            onChange={e => props.update(e.target.value)}
-          />
-          <label htmlFor="married--status">Filing Jointly</label>
-        </Radio>
-      </div>
     </div>
   );
 };
@@ -135,10 +103,6 @@ const Navigation = props => {
       <BucketSeclection
         value={props.values.activeBucket}
         update={props.updateBucket}
-      />
-      <StatusSelection
-        value={props.values.activeStatus}
-        update={props.updateStatus}
       />
       <ChildrenSelection
         value={props.values.activeChildren}
