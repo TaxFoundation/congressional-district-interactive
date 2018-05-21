@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip';
 
 const StyledHoverContainer = styled(ReactTooltip)`
   background-color: #fff !important;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
   color: #333 !important;
   font-family: 'Lato', sans-serif !important;
   font-size: 1rem !important;
