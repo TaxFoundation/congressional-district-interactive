@@ -21,7 +21,7 @@ class App extends Component {
       activeState: null,
       activeBucket: '30-75',
       activeChildren: 1,
-      domain: [-0.05, 0.05],
+      domain: [-0.04, 0.04],
     };
 
     this.updateActiveState = this.updateActiveState.bind(this);
