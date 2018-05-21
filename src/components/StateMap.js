@@ -100,7 +100,9 @@ class StateMap extends Component {
 
           return (
             <District
-              data-tip={`
+              data-tip={
+                districtData.i > 0
+                  ? `
                 <h3>
                   ${
                     districtId > 0
@@ -116,11 +118,13 @@ class StateMap extends Component {
                 <p>
                   Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is
                   ${formatter(Math.abs(districtData.t), '$')}, or ${formatter(
-                Math.abs(districtData.t / districtData.i),
-                '%'
-              )} ${+districtData.t > 0 ? 'more' : 'less'}.
+                      Math.abs(districtData.t / districtData.i),
+                      '%'
+                    )} ${+districtData.t > 0 ? 'more' : 'less'}.
                 </p>
-              `}
+              `
+                  : 'No data'
+              }
               data-for="statemap"
               d={
                 this.props.activeState === 2 || this.props.activeState === 15
@@ -128,9 +132,9 @@ class StateMap extends Component {
                   : path(d)
               }
               theColor={
-                districtData
+                districtData && districtData.i
                   ? colorize(districtData.t / districtData.i, this.props.domain)
-                  : null
+                  : '#888'
               }
               id={`district-detail-${d.properties.CD114FP}`}
               key={`district-detail-${d.properties.CD114FP}`}
