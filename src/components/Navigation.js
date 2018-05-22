@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #aaa;
   display: grid;
   font-family: 'Lato', sans-serif;
   font-size: 1rem;

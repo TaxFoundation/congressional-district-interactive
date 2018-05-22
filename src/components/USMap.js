@@ -5,6 +5,7 @@ import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import HoverContainer from './HoverContainer';
 import { colorize } from '../helpers';
+import STATES from '../data/states';
 
 const State = styled.path`
   cursor: pointer;
@@ -78,10 +79,12 @@ class USMap extends Component {
       this.props.us,
       this.props.us.objects.states
     ).features.map(d => {
+      const stateInfo = STATES.find(s => s.id === +d.id);
+
       return (
         <State
           d={path(d)}
-          data-tip={`This is state ${d.id}`}
+          data-tip={stateInfo ? stateInfo.name : null}
           data-for="usmap"
           key={`state-${d.id}`}
           onClick={e => {
