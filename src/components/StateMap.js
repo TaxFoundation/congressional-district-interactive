@@ -39,28 +39,15 @@ class StateMap extends Component {
     this.state = {
       stateData: null,
       activeDistrict: null,
-      activeIncome: 0,
-      activeStateTax: 0,
-      activeTaxDelta: 0,
     };
 
     this.getStateData = this.getStateData.bind(this);
-    this.updateActiveDistrict = this.updateActiveDistrict.bind(this);
   }
 
   componentDidMount() {
     this.getStateData(this.props.activeState)
       .then(data => this.setState({ stateData: data }))
       .catch(err => console.log(err));
-  }
-
-  updateActiveDistrict(id, districtData) {
-    this.setState({
-      activeDistrict: id,
-      activeIncome: districtData.i,
-      activeStateTax: districtData.s,
-      activeTaxDelta: districtData.t,
-    });
   }
 
   async getStateData(stateId) {
