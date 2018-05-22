@@ -110,7 +110,7 @@ class StateMap extends Component {
                       : 'At-Large District'
                   }
                 </h3>
-                <p>Average Income is ${formatter(districtData.i, '$')}.</p>
+                <p>Average income is ${formatter(districtData.i, '$')}.</p>
                 <p>Average state taxes paid is ${formatter(
                   districtData.s,
                   '$'
