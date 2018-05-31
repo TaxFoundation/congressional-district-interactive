@@ -7,7 +7,7 @@ import StateMap from './components/StateMap';
 import us from './data/us.json';
 import districts from './data/us-congress-113.json';
 import data from './data/data.json';
-import { colorize } from './helpers';
+import Legend from './components/Legend';
 
 const AppWrapper = styled.div`
   color: #333;
@@ -86,29 +86,7 @@ class App extends Component {
           updateChildren={this.updateChildren}
           updateActiveState={this.updateActiveState}
         />
-        <svg width="100%" viewBox={`0 0 ${this.xScale} 30`}>
-          <text x="90" y="8" fontSize="8" textAnchor="end">{`${100 *
-            Math.abs(this.state.domain[0])}% or More`}</text>
-          <text x="90" y="18" fontSize="8" textAnchor="end">
-            Increase
-          </text>
-          <text x={this.xScale - 110} y="8" fontSize="8" textAnchor="start">
-            {`${100 * Math.abs(this.state.domain[0])}% or More`}
-          </text>
-          <text x={this.xScale - 110} y="18" fontSize="8" textAnchor="start">
-            Cut
-          </text>
-          {[...Array(19).keys()].map(k => (
-            <rect
-              key={`legend-${k}`}
-              x={legendScale(k)}
-              y="0"
-              width={(this.xScale - 200) / 19}
-              height="20"
-              fill={colorize(-k, [0, 19])}
-            />
-          ))}
-        </svg>
+        <Legend domain={this.state.domain} steps={19} />
         {this.state.stateData ? (
           <StateMap
             activeState={this.state.activeState}
