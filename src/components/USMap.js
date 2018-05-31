@@ -29,21 +29,14 @@ const District = styled.path.attrs({
 `;
 
 class USMap extends Component {
-  constructor(props) {
-    super(props);
-
-    this.scale = 780;
-    this.xScale = 600;
-    this.yScale = 400;
-    this.xScalar = this.xScale / 600;
-    this.yScalar = this.yScale / 400;
-  }
-
   render() {
     const path = geoPath().projection(
       geoAlbersUsa()
-        .scale(this.scale)
-        .translate([this.xScale / 2, this.yScale / 2 - 25])
+        .scale(this.props.scale.scale)
+        .translate([
+          this.props.scale.xScale / 2,
+          this.props.scale.yScale / 2 - 25,
+        ])
     );
 
     const districtsFeatures = feature(
@@ -96,7 +89,10 @@ class USMap extends Component {
 
     return (
       <Fragment>
-        <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+        <svg
+          width="100%"
+          viewBox={`0 0 ${this.props.scale.xScale} ${this.props.scale.yScale}`}
+        >
           <defs>
             <path
               id="land"

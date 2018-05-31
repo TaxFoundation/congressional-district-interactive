@@ -27,20 +27,6 @@ const BG = styled.rect`
 `;
 
 class StateMap extends Component {
-  constructor(props) {
-    super(props);
-
-    this.scale = 780;
-    this.xScale = 600;
-    this.yScale = 400;
-    this.xScalar = this.xScale / 600;
-    this.yScalar = this.yScale / 400;
-
-    this.state = {
-      activeDistrict: null,
-    };
-  }
-
   render() {
     if (this.props.stateData === null) {
       return null;
@@ -55,11 +41,17 @@ class StateMap extends Component {
       );
 
       const path = geoPath().projection(
-        geoMercator().fitSize([this.xScale, this.yScale], districtsFeatures)
+        geoMercator().fitSize(
+          [this.props.scale.xScale, this.props.scale.yScale],
+          districtsFeatures
+        )
       );
 
       const altPath = geoPath().projection(
-        geoAlbersUsa().fitSize([this.xScale, this.yScale], districtsFeatures)
+        geoAlbersUsa().fitSize(
+          [this.props.scale.xScale, this.props.scale.yScale],
+          districtsFeatures
+        )
       );
 
       const bucketList = {
@@ -72,42 +64,40 @@ class StateMap extends Component {
 
       const districtShapes = districtsFeatures.features.map(d => {
         const districtId = +d.properties.CD114FP;
-        console.log(districtId);
         const hash = `${this.props.activeBucket}0${this.props.activeChildren}`;
         if (this.props.data[districtId]) {
           const districtData = this.props.data[districtId][hash];
 
-          return (
-            <District
-              data-tip={
-                districtData.i > 0
-                  ? `
-                <h3>
-                  ${
-                    districtId > 0
-                      ? `District ${districtId}`
-                      : this.props.activeState === 11
-                        ? 'District of Columbia'
-                        : 'At-Large District'
-                  }
-                </h3>
-                <p>Average income ${
-                  bucketList[this.props.activeBucket]
-                } is ${formatter(districtData.i, '$')}.</p>
-                <p>Average state taxes paid is ${formatter(
-                  districtData.s,
+          const dataTip =
+            districtData.i > 0
+              ? `
+        <h3>
+          ${
+            districtId > 0
+              ? `District ${districtId}`
+              : this.props.activeState === 11
+                ? 'District of Columbia'
+                : 'At-Large District'
+          }
+        </h3>
+        <p>Average income ${bucketList[this.props.activeBucket]} is ${formatter(
+                  districtData.i,
                   '$'
                 )}.</p>
-                <p>
-                  Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is
-                  ${formatter(Math.abs(districtData.t), '$')}, or ${formatter(
-                      Math.abs(districtData.t / districtData.i),
-                      '%'
-                    )} ${+districtData.t > 0 ? 'more' : 'less'}.
-                </p>
-              `
-                  : 'No data'
-              }
+        <p>Average state taxes paid is ${formatter(districtData.s, '$')}.</p>
+        <p>
+          Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is
+          ${formatter(Math.abs(districtData.t), '$')}, or ${formatter(
+                  Math.abs(districtData.t / districtData.i),
+                  '%'
+                )} ${+districtData.t > 0 ? 'more' : 'less'}.
+        </p>
+      `
+              : 'No data';
+
+          return (
+            <District
+              data-tip={dataTip}
               data-for="statemap"
               d={
                 this.props.activeState === 2 || this.props.activeState === 15
@@ -130,12 +120,17 @@ class StateMap extends Component {
 
       return (
         <Fragment>
-          <svg width="100%" viewBox={`0 0 ${this.xScale} ${this.yScale}`}>
+          <svg
+            width="100%"
+            viewBox={`0 0 ${this.props.scale.xScale} ${
+              this.props.scale.yScale
+            }`}
+          >
             <BG
               data-tip
               data-for="goBack"
-              height={this.yScale}
-              width={this.xScale}
+              height={this.props.scale.yScale}
+              width={this.props.scale.xScale}
               onClick={e => this.props.updateActiveState(0)}
             />
             {districtShapes}
