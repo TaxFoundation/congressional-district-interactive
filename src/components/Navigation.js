@@ -69,7 +69,7 @@ const RadioLabel = styled.label`
 
   &:hover {
     background-color: #0094ff;
-    border: 1px solid #0094ff;
+    border: ${props => (props.active ? '2px' : '1px')} solid #0094ff;
     color: #fff;
   }
 `;
