@@ -18,7 +18,8 @@ class App extends Component {
     super();
 
     this.state = {
-      activeState: null,
+      activeState: 0,
+      stateData: null,
       activeBucket: '30-75',
       activeChildren: 1,
       domain: [-0.04, 0.04],
@@ -30,7 +31,17 @@ class App extends Component {
   }
 
   updateActiveState(id) {
-    this.setState({ activeState: id });
+    const theId = +id;
+
+    if (theId > 0) {
+      this.getStateData(theId)
+        .then(data => {
+          this.setState({ activeState: theId, stateData: data });
+        })
+        .catch(err => console.log(err));
+    } else {
+      this.setState({ stateData: null, activeState: 0 });
+    }
   }
 
   updateBucket(activeBucket) {
@@ -41,6 +52,14 @@ class App extends Component {
     this.setState({ activeChildren });
   }
 
+  async getStateData(stateId) {
+    const response = await fetch(
+      `states/${stateId < 10 ? `0${stateId}` : stateId}.json`
+    );
+    const data = await response.json();
+    return data;
+  }
+
   render() {
     return (
       <AppWrapper className="App">
@@ -48,10 +67,12 @@ class App extends Component {
           values={this.state}
           updateBucket={this.updateBucket}
           updateChildren={this.updateChildren}
+          updateActiveState={this.updateActiveState}
         />
-        {this.state.activeState ? (
+        {this.state.stateData ? (
           <StateMap
             activeState={this.state.activeState}
+            stateData={this.state.stateData}
             data={data[this.state.activeState]}
             domain={this.state.domain}
             activeBucket={this.state.activeBucket}

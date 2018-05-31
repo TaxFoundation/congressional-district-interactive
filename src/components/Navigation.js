@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import STATES from '../data/states';
 
 const Container = styled.div`
   border-bottom: 1px solid #aaa;
@@ -7,7 +8,7 @@ const Container = styled.div`
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
   grid-gap: 1rem;
-  grid-template: auto / repeat(2, 1fr);
+  grid-template: auto / repeat(3, 1fr);
   justify-items: stretch;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
@@ -114,6 +115,29 @@ const BucketSeclection = props => {
   );
 };
 
+const USStateSelection = props => {
+  return (
+    <div>
+      <NavSectionHeading>Choose a State</NavSectionHeading>
+      <div>
+        <Select
+          name="theState"
+          id="theState"
+          value={props.value}
+          onChange={e => props.update(e.target.value)}
+        >
+          <option value="0">No State Selected</option>
+          {STATES.map(s => (
+            <option key={`theState-${s.id}`} value={s.id}>
+              {s.name}
+            </option>
+          ))}
+        </Select>
+      </div>
+    </div>
+  );
+};
+
 const ChildrenSelection = props => {
   return (
     <div>
@@ -155,6 +179,10 @@ const Navigation = props => {
       <ChildrenSelection
         value={props.values.activeChildren}
         update={props.updateChildren}
+      />
+      <USStateSelection
+        value={props.values.activeState}
+        update={props.updateActiveState}
       />
     </Container>
   );

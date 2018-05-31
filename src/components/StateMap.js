@@ -37,34 +37,17 @@ class StateMap extends Component {
     this.yScalar = this.yScale / 400;
 
     this.state = {
-      stateData: null,
       activeDistrict: null,
     };
-
-    this.getStateData = this.getStateData.bind(this);
-  }
-
-  componentDidMount() {
-    this.getStateData(this.props.activeState)
-      .then(data => this.setState({ stateData: data }))
-      .catch(err => console.log(err));
-  }
-
-  async getStateData(stateId) {
-    const response = await fetch(
-      `states/${stateId < 10 ? `0${stateId}` : stateId}.json`
-    );
-    const data = await response.json();
-    return data;
   }
 
   render() {
-    if (this.state.stateData === null) {
+    if (this.props.stateData === null) {
       return null;
     } else {
       const districtsFeatures = feature(
-        this.state.stateData,
-        this.state.stateData.objects[
+        this.props.stateData,
+        this.props.stateData.objects[
           this.props.activeState < 10
             ? `0${this.props.activeState}`
             : this.props.activeState
@@ -89,6 +72,7 @@ class StateMap extends Component {
 
       const districtShapes = districtsFeatures.features.map(d => {
         const districtId = +d.properties.CD114FP;
+        console.log(districtId);
         const hash = `${this.props.activeBucket}0${this.props.activeChildren}`;
         if (this.props.data[districtId]) {
           const districtData = this.props.data[districtId][hash];
@@ -102,7 +86,9 @@ class StateMap extends Component {
                   ${
                     districtId > 0
                       ? `District ${districtId}`
-                      : 'At-Large District'
+                      : this.props.activeState === 11
+                        ? 'District of Columbia'
+                        : 'At-Large District'
                   }
                 </h3>
                 <p>Average income ${
@@ -150,7 +136,7 @@ class StateMap extends Component {
               data-for="goBack"
               height={this.yScale}
               width={this.xScale}
-              onClick={e => this.props.updateActiveState(null)}
+              onClick={e => this.props.updateActiveState(0)}
             />
             {districtShapes}
           </svg>
