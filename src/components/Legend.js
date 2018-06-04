@@ -26,14 +26,14 @@ const LegendStop = styled.div`
 const Legend = props => (
   <LegendContainer steps={props.steps}>
     <LegendText textAlign="right">
-      {`${100 * Math.abs(props.domain[0])}%`}
+      {`${100 * Math.abs(props.domain[0])}% or More`}
       <br />Increase
     </LegendText>
     {[...Array(props.steps).keys()].map(k => (
       <LegendStop key={`legend-${k}`} steps={props.steps} step={k} />
     ))}
     <LegendText textAlign="left">
-      {`${100 * Math.abs(props.domain[0])}%`}
+      {`${100 * Math.abs(props.domain[0])}% or More`}
       <br />Cut
     </LegendText>
   </LegendContainer>
