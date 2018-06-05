@@ -50,49 +50,6 @@ const Select = styled.select`
   }
 `;
 
-const RadioContainer = styled.div`
-  display: inline-block;
-  margin: 0 0.5rem;
-`;
-
-const RadioLabel = styled.label`
-  background-color: ${props => (props.active ? '#e6f4ff' : 'fff')};
-  border: ${props => (props.active ? '2px' : '1px')} solid
-    ${props => (props.active ? '#0094ff' : '#333')};
-  border-radius: 4px;
-  color: ${props => (props.active ? '#0094ff' : '#333')};
-  cursor: pointer;
-  display: block;
-  font-weight: ${props => (props.active ? 700 : 400)};
-  margin: 0 auto 0.5rem !important;
-  padding: 10px 20px;
-
-  &:hover {
-    background-color: #0094ff;
-    border: ${props => (props.active ? '2px' : '1px')} solid #0094ff;
-    color: #fff;
-  }
-`;
-
-const Radio = props => {
-  return (
-    <RadioContainer>
-      <input
-        type="radio"
-        name={props.id}
-        id={props.id}
-        value={props.value}
-        checked={props.value === props.active}
-        onChange={e => props.update(e.target.value)}
-        style={{ display: 'none' }}
-      />
-      <RadioLabel htmlFor={props.id} active={props.value === props.active}>
-        {props.name}
-      </RadioLabel>
-    </RadioContainer>
-  );
-};
-
 const BucketSeclection = props => {
   return (
     <div>
@@ -104,7 +61,11 @@ const BucketSeclection = props => {
           value={props.value}
           onChange={e => props.update(e.target.value)}
         >
-          {props.buckets.map(b => <option value={b.id}>{b.value}</option>)}
+          {props.buckets.map(b => (
+            <option key={`bucket-${b.id}`} value={b.id}>
+              {b.value}
+            </option>
+          ))}
         </Select>
       </div>
     </div>

@@ -26,6 +26,39 @@ const BG = styled.rect`
   width: ${props => props.width};
 `;
 
+const dataTip = (theState, theDistrict, bucket, data) => {
+  const buckets = {
+    0: '$0 to $10k',
+    1: '$10 to $25k',
+    2: '$25k to $50k',
+    3: '$50k to $75k',
+    4: '$75k to $100k',
+    5: '$100k to $200k',
+    6: '$200k and up',
+  };
+
+  return `
+  <h3>
+    ${
+      theDistrict > 0
+        ? `District ${theDistrict}`
+        : theState === 11
+          ? 'District of Columbia'
+          : 'At-Large District'
+    }
+  </h3>
+  <p>Average income ${buckets[bucket]} is ${formatter(data.i, '$')}.</p>
+  <p>Average state taxes paid is ${formatter(data.s, '$')}.</p>
+  <p>
+    Average tax ${+data.t > 0 ? 'increase' : 'cut'} is
+    ${formatter(Math.abs(data.t), '$')}, or ${formatter(
+    Math.abs(data.t / data.i),
+    '%'
+  )} ${+data.t > 0 ? 'more' : 'less'}.
+  </p>
+  `;
+};
+
 class StateMap extends Component {
   render() {
     if (this.props.stateData === null) {
@@ -61,35 +94,19 @@ class StateMap extends Component {
             this.props.activeBucket
           ];
 
-          const dataTip =
+          const theTip =
             districtData.i > 0
-              ? `
-        <h3>
-          ${
-            districtId > 0
-              ? `District ${districtId}`
-              : this.props.activeState === 11
-                ? 'District of Columbia'
-                : 'At-Large District'
-          }
-        </h3>
-        <p>Average income ${
-          this.props.buckets[this.props.activeBucket]
-        } is ${formatter(districtData.i, '$')}.</p>
-        <p>Average state taxes paid is ${formatter(districtData.s, '$')}.</p>
-        <p>
-          Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is
-          ${formatter(Math.abs(districtData.t), '$')}, or ${formatter(
-                  Math.abs(districtData.t / districtData.i),
-                  '%'
-                )} ${+districtData.t > 0 ? 'more' : 'less'}.
-        </p>
-      `
+              ? dataTip(
+                  this.props.activeState,
+                  districtId,
+                  this.props.activeBucket,
+                  districtData
+                )
               : 'No data';
 
           return (
             <District
-              data-tip={dataTip}
+              data-tip={theTip}
               data-for="statemap"
               d={
                 this.props.activeState === 2 || this.props.activeState === 15

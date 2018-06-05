@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { scaleLinear } from 'd3-scale';
 import Navigation from './components/Navigation';
 import USMap from './components/USMap';
 import StateMap from './components/StateMap';
@@ -83,10 +82,6 @@ class App extends Component {
   }
 
   render() {
-    const legendScale = scaleLinear()
-      .range([100, this.xScale - 100])
-      .domain([0, 20]);
-
     return (
       <AppWrapper className="App">
         <Navigation
