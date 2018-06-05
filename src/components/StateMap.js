@@ -68,10 +68,10 @@ const dataTip = (theState, theDistrict, bucket, data) => {
           : 'At-Large District'
     }
   </h3>
-  <p>Average income ${buckets[bucket]} is ${formatter(data.i, '$')}.</p>
+  <p>Average AGI is ${formatter(data.i, '$')}.</p>
   <p>Average state taxes paid is ${formatter(data.s, '$')}.</p>
   <p>
-    Average tax ${+data.t > 0 ? 'increase' : 'cut'} is
+    Average ${+data.t > 0 ? 'increase' : 'decrease'} in after-tax income is
     ${formatter(Math.abs(data.t), '$')}, or ${formatter(
     Math.abs(data.t / data.i),
     '%'
