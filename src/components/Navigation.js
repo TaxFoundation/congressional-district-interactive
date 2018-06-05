@@ -104,11 +104,13 @@ const BucketSeclection = props => {
           value={props.value}
           onChange={e => props.update(e.target.value)}
         >
-          <option value="0-30">$0 - $30k</option>
-          <option value="30-75">$30k - $75k</option>
-          <option value="75-150">$75k - $150k</option>
-          <option value="150-500">$150k - $500k</option>
-          <option value="500-inf">$500k and Up</option>
+          <option value="0">$0 to $10k</option>
+          <option value="1">$10k to $25k</option>
+          <option value="2">$25k to $50k</option>
+          <option value="3">$50k to $75k</option>
+          <option value="4">$75k to $100k</option>
+          <option value="5">$100k to $200k</option>
+          <option value="6">above $200k</option>
         </Select>
       </div>
     </div>

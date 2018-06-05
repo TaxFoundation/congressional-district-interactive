@@ -55,11 +55,13 @@ class StateMap extends Component {
       );
 
       const bucketList = {
-        '0-30': 'between $0 to $30k',
-        '30-75': 'between $30k to $75k',
-        '75-150': 'between $75k to $150k',
-        '150-500': 'between $150k to $500k',
-        '500-inf': 'above $500k',
+        '0': 'between $0 to $10k',
+        '1': 'between $10k to $25k',
+        '2': 'between $25k to $50k',
+        '3': 'between $50k to $75k',
+        '4': 'between $75k to $100k',
+        '5': 'between $100k to $200k',
+        '6': 'above $200k',
       };
 
       const districtShapes = districtsFeatures.features.map(d => {
@@ -80,13 +82,13 @@ class StateMap extends Component {
                 : 'At-Large District'
           }
         </h3>
-        <p>Average income ${bucketList[this.props.activeBucket]} is ${formatter(
+        <p>Average AGI is ${formatter(
                   districtData.i,
                   '$'
                 )}.</p>
         <p>Average state taxes paid is ${formatter(districtData.s, '$')}.</p>
         <p>
-          Average tax ${+districtData.t > 0 ? 'increase' : 'cut'} is
+          Average ${+districtData.t > 0 ? 'increase' : 'decline'} in after-tax income is
           ${formatter(Math.abs(districtData.t), '$')}, or ${formatter(
                   Math.abs(districtData.t / districtData.i),
                   '%'
