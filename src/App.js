@@ -27,8 +27,8 @@ class App extends Component {
     this.state = {
       activeState: 0,
       stateData: null,
-      activeBucket: '30-75',
-      activeChildren: 1,
+      activeBucket: '3',
+      activeChildren: 0,
       domain: [-0.04, 0.04],
     };
 
