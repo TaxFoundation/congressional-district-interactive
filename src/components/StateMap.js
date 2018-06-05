@@ -26,15 +26,36 @@ const BG = styled.rect`
   width: ${props => props.width};
 `;
 
+const BackToUS = styled.p`
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #333;
+  cursor: pointer;
+  margin: 1rem auto;
+  max-width: 300px;
+  padding: 0.5rem;
+  text-align: center;
+  transition: background-color 0.1s ease-in, border 0.1s ease-in,
+    color 0.1s ease-in, font-weight 0.1s ease-in;
+
+  &:hover {
+    background-color: #e6f4ff;
+    border: 1px solid #0094ff;
+    color: #0094ff;
+    font-weight: 700;
+  }
+`;
+
 const dataTip = (theState, theDistrict, bucket, data) => {
   const buckets = {
-    0: '$0 to $10k',
-    1: '$10 to $25k',
-    2: '$25k to $50k',
-    3: '$50k to $75k',
-    4: '$75k to $100k',
-    5: '$100k to $200k',
-    6: '$200k and up',
+    0: 'between $0 and $10k',
+    1: 'between $10 and $25k',
+    2: 'between $25k and $50k',
+    3: 'between $50k and $75k',
+    4: 'between $75k and $100k',
+    5: 'between $100k and $200k',
+    6: 'above $200k',
   };
 
   return `
@@ -102,7 +123,7 @@ class StateMap extends Component {
                   this.props.activeBucket,
                   districtData
                 )
-              : 'No data';
+              : `Data unavailable for District ${districtId}.`;
 
           return (
             <District
@@ -144,6 +165,9 @@ class StateMap extends Component {
             />
             {districtShapes}
           </svg>
+          <BackToUS onClick={e => this.props.updateActiveState(0)}>
+            Go Back to US Map
+          </BackToUS>
           <HoverContainer id="statemap" html={true} />
           <HoverContainer
             id="goBack"
