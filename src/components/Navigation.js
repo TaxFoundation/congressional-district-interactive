@@ -8,7 +8,7 @@ const Container = styled.div`
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
   grid-gap: 1rem;
-  grid-template: auto / repeat(3, 1fr);
+  grid-template: auto / repeat(2, 1fr);
   justify-items: stretch;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
@@ -104,11 +104,7 @@ const BucketSeclection = props => {
           value={props.value}
           onChange={e => props.update(e.target.value)}
         >
-          <option value="0-30">$0 - $30k</option>
-          <option value="30-75">$30k - $75k</option>
-          <option value="75-150">$75k - $150k</option>
-          <option value="150-500">$150k - $500k</option>
-          <option value="500-inf">$500k and Up</option>
+          {props.buckets.map(b => <option value={b.id}>{b.value}</option>)}
         </Select>
       </div>
     </div>
@@ -138,47 +134,13 @@ const USStateSelection = props => {
   );
 };
 
-const ChildrenSelection = props => {
-  return (
-    <div>
-      <NavSectionHeading>Choose Number of Children</NavSectionHeading>
-      <div style={{ textAlign: 'center' }}>
-        <Radio
-          id="children-0"
-          value={0}
-          active={+props.value}
-          update={props.update}
-          name="No Children"
-        />
-        <Radio
-          id="children-1"
-          value={1}
-          active={+props.value}
-          update={props.update}
-          name="One Child"
-        />
-        <Radio
-          id="children-2"
-          value={2}
-          active={+props.value}
-          update={props.update}
-          name="Two Children"
-        />
-      </div>
-    </div>
-  );
-};
-
 const Navigation = props => {
   return (
     <Container>
       <BucketSeclection
+        buckets={props.buckets}
         value={props.values.activeBucket}
         update={props.updateBucket}
-      />
-      <ChildrenSelection
-        value={props.values.activeChildren}
-        update={props.updateChildren}
       />
       <USStateSelection
         value={props.values.activeState}

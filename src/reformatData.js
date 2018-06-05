@@ -17,9 +17,8 @@ const updateData = () => {
       if (!newData[r.state_fips][r.district])
         newData[r.state_fips][r.district] = {};
 
-      let hash = `${r.income}${r.filing_status}${r.child_dep}`;
-      if (!newData[r.state_fips][r.district][hash]) {
-        newData[r.state_fips][r.district][hash] = {
+      if (!newData[r.state_fips][r.district][r.income]) {
+        newData[r.state_fips][r.district][r.income] = {
           i: r.avg_income_ALL,
           s: r.taxes_paid_ded,
           t: r['current-law-tax'] - r['pre-tcja-tax'],

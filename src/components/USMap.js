@@ -47,10 +47,12 @@ class USMap extends Component {
     const districtShapes = districtsFeatures.map(d => {
       const stateId = Math.floor(+d.id / 100);
       const districtId = d.id % 100;
-      const hash = `${this.props.activeBucket}0${this.props.activeChildren}`;
+      const hash = `${this.props.activeBucket}`;
       let districtData;
       if (this.props.data[stateId] && this.props.data[stateId][districtId]) {
-        districtData = this.props.data[stateId][districtId][hash];
+        districtData = this.props.data[stateId][districtId][
+          this.props.activeBucket
+        ];
         return (
           <District
             d={path(d)}

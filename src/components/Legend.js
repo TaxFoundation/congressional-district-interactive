@@ -19,7 +19,7 @@ const LegendText = styled.p`
 `;
 
 const LegendStop = styled.div`
-  background-color: ${props => colorize(-props.step, [0, props.steps])};
+  background-color: ${props => colorize(props.step, [0, props.steps])};
   height: 100%;
 `;
 
