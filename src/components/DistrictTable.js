@@ -14,6 +14,33 @@ const StyledDistrictTable = styled.div`
   padding: 1rem;
 `;
 
+const Table = styled.table`
+  border-collapse: collapse;
+  font-size: 0.8rem;
+
+  tr:first-child {
+    font-size: 1.2rem;
+  }
+
+  tr > td {
+    border-bottom: 1px solid #ccc;
+    padding: 0.5rem 0;
+
+    &:last-child {
+      padding: 0.5rem 0 0.5rem 1.5rem;
+    }
+  }
+
+  tr:last-child > td {
+    border: none;
+  }
+`;
+
+const ValueCell = styled.td`
+  font-family: 'Roboto Mono', monospace;
+  text-align: right;
+`;
+
 const DistrictTable = props => {
   let theData = { i: '', s: '', t: '' };
   let bucketText = '';
@@ -44,22 +71,26 @@ const DistrictTable = props => {
           <h3 style={{ textAlign: 'center' }}>At-Large District</h3>
         )}
         {theData ? (
-          <table>
+          <Table>
             <tbody>
               <tr>
                 <td>Avg. Tax Cut</td>
-                <td>{formatter(theData.t, '$')}</td>
+                <ValueCell>{formatter(theData.t, '$')}</ValueCell>
               </tr>
               <tr>
                 <td>Avg. Tax Cut as % of Income</td>
-                <td>{formatter(theData.t / theData.i, '%')}</td>
+                <ValueCell>{formatter(theData.t / theData.i, '%')}</ValueCell>
               </tr>
               <tr>
                 <td>{`Avg. Income from ${bucketText}`}</td>
-                <td>{formatter(theData.i, '$')}</td>
+                <ValueCell>{formatter(theData.i, '$')}</ValueCell>
+              </tr>
+              <tr>
+                <td>Avg. State Taxes Paid</td>
+                <ValueCell>{formatter(theData.s, '$')}</ValueCell>
               </tr>
             </tbody>
-          </table>
+          </Table>
         ) : null}
       </div>
       <Button
