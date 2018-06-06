@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
-import BUCKETS from '../data/buckets.json';
 import HoverContainer from './HoverContainer';
 import DistrictTable from './DistrictTable';
 import Button from './Button';
 import Select from './Select';
-import { colorize, formatter } from '../helpers';
+import { colorize } from '../helpers';
 
 const Container = styled.div`
   display: grid;
@@ -53,6 +52,7 @@ class StateMap extends Component {
     });
 
   componentDidMount() {
+    console.log(this.buckets);
     let activeDistrict = 0;
     if (Object.keys(this.props.data).length > 1) {
       activeDistrict = 1;
@@ -137,61 +137,13 @@ class StateMap extends Component {
               />
               {districtShapes}
             </svg>
-            <DistrictTable>
-              <div>
-                {Object.keys(this.props.data).length > 1 ? (
-                  <Select
-                    name="district"
-                    id="district"
-                    value={this.state.activeDistrict}
-                    onChange={e => this.updateActiveDistrict(e.target.value)}
-                  >
-                    {Object.keys(this.props.data).map(d => (
-                      <option key={`district-opt-${d}`} value={+d}>
-                        {`District ${d}`}
-                      </option>
-                    ))}
-                  </Select>
-                ) : this.props.activeState === 11 ? (
-                  <h3 style={{ textAlign: 'center' }}>District of Columbia</h3>
-                ) : (
-                  <h3 style={{ textAlign: 'center' }}>At-Large District</h3>
-                )}
-                {this.state.data ? (
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>Avg. Tax Cut</td>
-                        <td>{formatter(this.state.data.t, '$')}</td>
-                      </tr>
-                      <tr>
-                        <td>Avg. Tax Cut as % of Income</td>
-                        <td>
-                          {formatter(
-                            this.state.data.t / this.state.data.i,
-                            '%'
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          {`Avg. Income from ${
-                            BUCKETS.find(b => b.id === this.props.activeBucket)
-                              .value
-                          }`}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                ) : null}
-              </div>
-              <Button
-                style={{ alignSelf: 'end' }}
-                onClick={e => this.props.updateActiveState(0)}
-              >
-                Go Back to US Map
-              </Button>
-            </DistrictTable>
+            <DistrictTable
+              data={this.props.data}
+              activeBucket={this.props.activeBucket}
+              activeState={this.props.activeState}
+              activeDistrict={this.state.activeDistrict}
+              updateActiveDistrict={this.updateActiveDistrict}
+            />
           </Container>
         </Fragment>
       );

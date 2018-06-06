@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Select from './Select';
-import BUCKETS from '../data/buckets.json';
+import BUCKETS from '../data/buckets.js';
 import STATES from '../data/states';
 
 const Container = styled.div`
