@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Select from './Select';
+import BUCKETS from '../data/buckets.json';
 import STATES from '../data/states';
 
 const Container = styled.div`
@@ -39,7 +40,7 @@ const BucketSeclection = props => {
           value={props.value}
           onChange={e => props.update(e.target.value)}
         >
-          {props.buckets.map(b => (
+          {BUCKETS.map(b => (
             <option key={`bucket-${b.id}`} value={b.id}>
               {b.value}
             </option>

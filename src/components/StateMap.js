@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
+import BUCKETS from '../data/buckets.json';
 import HoverContainer from './HoverContainer';
 import DistrictTable from './DistrictTable';
 import Button from './Button';
@@ -170,6 +171,14 @@ class StateMap extends Component {
                             this.state.data.t / this.state.data.i,
                             '%'
                           )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          {`Avg. Income from ${
+                            BUCKETS.find(b => b.id === this.props.activeBucket)
+                              .value
+                          }`}
                         </td>
                       </tr>
                     </tbody>
