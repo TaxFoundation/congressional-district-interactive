@@ -11,7 +11,7 @@ import { colorize } from '../helpers';
 
 const Container = styled.div`
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
   grid-template: repeat(2, auto) / auto;
 
   @media (min-width: 800px) {

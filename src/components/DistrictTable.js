@@ -17,6 +17,7 @@ const StyledDistrictTable = styled.div`
 const Table = styled.table`
   border-collapse: collapse;
   font-size: 0.8rem;
+  width: 100%;
 
   tr:first-child {
     font-size: 1.2rem;
@@ -37,6 +38,7 @@ const Table = styled.table`
 `;
 
 const ValueCell = styled.td`
+  color: ${props => (props.color ? props.color : '#333')};
   font-family: 'Roboto Mono', monospace;
   text-align: right;
 `;
@@ -75,11 +77,15 @@ const DistrictTable = props => {
             <tbody>
               <tr>
                 <td>Avg. Tax Cut</td>
-                <ValueCell>{formatter(theData.t, '$')}</ValueCell>
+                <ValueCell color={theData.t >= 0 ? '#00aa22' : '#ef4438'}>
+                  {formatter(theData.t, '$')}
+                </ValueCell>
               </tr>
               <tr>
                 <td>Avg. Tax Cut as % of Income</td>
-                <ValueCell>{formatter(theData.t / theData.i, '%')}</ValueCell>
+                <ValueCell color={theData.t >= 0 ? '#00aa22' : '#ef4438'}>
+                  {formatter(theData.t / theData.i, '%')}
+                </ValueCell>
               </tr>
               <tr>
                 <td>{`Avg. Income from ${bucketText}`}</td>
