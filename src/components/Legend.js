@@ -33,7 +33,7 @@ const Legend = props => (
       <LegendStop key={`legend-${k}`} steps={props.steps} step={k} />
     ))}
     <LegendText textAlign="left">
-      {`${100 * Math.abs(props.domain[0])}% or More`}
+      {`${100 * Math.abs(props.domain[1])}% or More`}
       <br />Cut
     </LegendText>
   </LegendContainer>
