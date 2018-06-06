@@ -96,7 +96,6 @@ class App extends Component {
           <StateMap
             activeState={this.state.activeState}
             stateData={this.state.stateData}
-            buckets={buckets}
             data={data[this.state.activeState]}
             domain={this.state.domain}
             activeBucket={this.state.activeBucket}

@@ -4,7 +4,20 @@ import styled from 'styled-components';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import HoverContainer from './HoverContainer';
+import DistrictTable from './DistrictTable';
+import Button from './Button';
+import Select from './Select';
 import { colorize, formatter } from '../helpers';
+
+const Container = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template: repeat(2, auto) / auto;
+
+  @media (min-width: 800px) {
+    grid-template: auto / 3fr 1fr;
+  }
+`;
 
 const District = styled.path.attrs({
   fill: props => (props.theColor ? props.theColor : '#333'),
@@ -26,61 +39,29 @@ const BG = styled.rect`
   width: ${props => props.width};
 `;
 
-const BackToUS = styled.p`
-  background-color: #fff;
-  border: 1px solid #333;
-  border-radius: 4px;
-  color: #333;
-  cursor: pointer;
-  margin: 1rem auto;
-  max-width: 300px;
-  padding: 0.5rem;
-  text-align: center;
-  transition: background-color 0.1s ease-in, border 0.1s ease-in,
-    color 0.1s ease-in, font-weight 0.1s ease-in;
-
-  &:hover {
-    background-color: #e6f4ff;
-    border: 1px solid #0094ff;
-    color: #0094ff;
-    font-weight: 700;
-  }
-`;
-
-const dataTip = (theState, theDistrict, bucket, data) => {
-  const buckets = {
-    0: 'between $0 and $10k',
-    1: 'between $10 and $25k',
-    2: 'between $25k and $50k',
-    3: 'between $50k and $75k',
-    4: 'between $75k and $100k',
-    5: 'between $100k and $200k',
-    6: 'above $200k',
+class StateMap extends Component {
+  state = {
+    activeDistrict: 0,
+    data: null,
   };
 
-  return `
-  <h3>
-    ${
-      theDistrict > 0
-        ? `District ${theDistrict}`
-        : theState === 11
-          ? 'District of Columbia'
-          : 'At-Large District'
-    }
-  </h3>
-  <p>Average income ${buckets[bucket]} is ${formatter(data.i, '$')}.</p>
-  <p>Average state taxes paid is ${formatter(data.s, '$')}.</p>
-  <p>
-    Average tax ${+data.t > 0 ? 'increase' : 'cut'} is
-    ${formatter(Math.abs(data.t), '$')}, or ${formatter(
-    Math.abs(data.t / data.i),
-    '%'
-  )} ${+data.t > 0 ? 'more' : 'less'}.
-  </p>
-  `;
-};
+  updateActiveDistrict = id =>
+    this.setState({
+      activeDistrict: id,
+      data: this.props.data[id][this.props.activeBucket],
+    });
 
-class StateMap extends Component {
+  componentDidMount() {
+    let activeDistrict = 0;
+    if (Object.keys(this.props.data).length > 1) {
+      activeDistrict = 1;
+      this.updateActiveDistrict(activeDistrict);
+    }
+    this.setState({
+      data: this.props.data[activeDistrict][this.props.activeBucket],
+    });
+  }
+
   render() {
     if (this.props.stateData === null) {
       return null;
@@ -115,20 +96,8 @@ class StateMap extends Component {
             this.props.activeBucket
           ];
 
-          const theTip =
-            districtData.i > 0
-              ? dataTip(
-                  this.props.activeState,
-                  districtId,
-                  this.props.activeBucket,
-                  districtData
-                )
-              : `Data unavailable for District ${districtId}.`;
-
           return (
             <District
-              data-tip={theTip}
-              data-for="statemap"
               d={
                 this.props.activeState === 2 || this.props.activeState === 15
                   ? altPath(d)
@@ -150,29 +119,68 @@ class StateMap extends Component {
 
       return (
         <Fragment>
-          <svg
-            width="100%"
-            viewBox={`0 0 ${this.props.scale.xScale} ${
-              this.props.scale.yScale
-            }`}
-          >
-            <BG
-              data-tip
-              data-for="goBack"
-              height={this.props.scale.yScale}
-              width={this.props.scale.xScale}
-              onClick={e => this.props.updateActiveState(0)}
-            />
-            {districtShapes}
-          </svg>
-          <BackToUS onClick={e => this.props.updateActiveState(0)}>
-            Go Back to US Map
-          </BackToUS>
-          <HoverContainer id="statemap" html={true} />
-          <HoverContainer
-            id="goBack"
-            getContent={() => <p>Click to return to US map.</p>}
-          />
+          <Container>
+            <svg
+              width="100%"
+              viewBox={`0 0 ${this.props.scale.xScale} ${
+                this.props.scale.yScale
+              }`}
+            >
+              <BG
+                height={this.props.scale.yScale}
+                width={this.props.scale.xScale}
+                onClick={e => this.props.updateActiveState(0)}
+              />
+              {districtShapes}
+            </svg>
+            <DistrictTable>
+              <div>
+                {Object.keys(this.props.data).length > 1 ? (
+                  <Select
+                    name="district"
+                    id="district"
+                    value={this.state.activeDistrict}
+                    onChange={e => this.updateActiveDistrict(e.target.value)}
+                  >
+                    {Object.keys(this.props.data).map(d => (
+                      <option key={`district-opt-${d}`} value={+d}>
+                        {`District ${d}`}
+                      </option>
+                    ))}
+                  </Select>
+                ) : this.props.activeState === 11 ? (
+                  <h3 style={{ textAlign: 'center' }}>District of Columbia</h3>
+                ) : (
+                  <h3 style={{ textAlign: 'center' }}>At-Large District</h3>
+                )}
+                {this.state.data ? (
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Avg. Tax Cut</td>
+                        <td>{formatter(this.state.data.t, '$')}</td>
+                      </tr>
+                      <tr>
+                        <td>Avg. Tax Cut as % of Income</td>
+                        <td>
+                          {formatter(
+                            this.state.data.t / this.state.data.i,
+                            '%'
+                          )}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                ) : null}
+              </div>
+              <Button
+                style={{ alignSelf: 'end' }}
+                onClick={e => this.props.updateActiveState(0)}
+              >
+                Go Back to US Map
+              </Button>
+            </DistrictTable>
+          </Container>
         </Fragment>
       );
     }
