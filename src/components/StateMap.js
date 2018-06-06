@@ -110,6 +110,9 @@ class StateMap extends Component {
               }
               id={`district-detail-${d.properties.CD114FP}`}
               key={`district-detail-${d.properties.CD114FP}`}
+              onMouseOver={e =>
+                districtId > 0 ? this.updateActiveDistrict(districtId) : null
+              }
             />
           );
         } else {
