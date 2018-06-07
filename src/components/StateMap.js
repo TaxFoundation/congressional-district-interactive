@@ -143,6 +143,7 @@ class StateMap extends Component {
               activeState={this.props.activeState}
               activeDistrict={this.state.activeDistrict}
               updateActiveDistrict={this.updateActiveDistrict}
+              updateActiveState={this.props.updateActiveState}
             />
           </Container>
         </Fragment>
