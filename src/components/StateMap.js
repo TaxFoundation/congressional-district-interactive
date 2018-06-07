@@ -21,12 +21,8 @@ const District = styled.path.attrs({
 })`
   cursor: pointer;
   stroke: #fff;
-  stroke-width: 0.5;
+  stroke-width: ${props => (props.active ? 1.5 : 0.5)};
   stroke-linejoin: bevel;
-
-  &:hover {
-    stroke-width: 2;
-  }
 `;
 
 const BG = styled.rect`
@@ -121,6 +117,7 @@ class StateMap extends Component {
               }
               id={`district-detail-${d.properties.CD114FP}`}
               key={`district-detail-${d.properties.CD114FP}`}
+              active={+districtId === +this.state.activeDistrict}
               onMouseOver={e =>
                 districtId > 0 ? this.updateActiveDistrict(districtId) : null
               }

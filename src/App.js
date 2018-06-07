@@ -77,15 +77,16 @@ class App extends Component {
     return (
       <AppWrapper className="App">
         <Banner />
-        <h1 style={{ textAlign: 'center' }}>
-          How Could the Tax Cuts and Jobs Act Impact Taxpayers?
-        </h1>
+        <h1 style={{ textAlign: 'center' }}>Mapping 2018 Tax Reform</h1>
+        <h2 style={{ textAlign: 'center' }}>
+          The Impact of the Tax Cuts and Jobs Act by Congressional District
+        </h2>
         <SocialButtons
           size="30px"
-          message="How will the Tax Cuts and Jobs Act impact after-tax incomes? This map shows you where people are getting tax cuts and by how much."
+          message="How will the Tax Cuts and Jobs Act impact incomes in your congressional district? Check out this new interactive map. ${window.location.href}"
           hashtags="TaxReform"
-          emailSubject="Tax Cuts Map"
-          emailBody={`Check out this new interactive map from the Tax Foundation showing how the Tax Cuts and Jobs act affects different regions and income brackets across the US. ${
+          emailSubject="Mapping 2018 Tax Reform"
+          emailBody={`The Tax Foundation's 2018 tax reform map shows you how the Tax Cuts and Jobs Act will impact average incomes in congressional districts around the country. You can see the impact on your district here: ${
             window.location.href
           }`}
         />

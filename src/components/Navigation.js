@@ -5,14 +5,16 @@ import BUCKETS from '../data/buckets.js';
 import STATES from '../data/states';
 
 const Container = styled.div`
-  border-bottom: 1px solid #aaa;
+  background-color: #f5f5f5;
+  border: 1px solid #aaa;
+  border-radius: 4px;
   display: grid;
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
   grid-gap: 1rem;
   grid-template: auto / repeat(2, 1fr);
   justify-items: stretch;
-  padding-bottom: 1rem;
+  padding: 1rem;
   margin-bottom: 1rem;
 
   @media (max-width: 600px) {
