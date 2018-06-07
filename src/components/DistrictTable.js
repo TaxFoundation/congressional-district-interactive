@@ -105,7 +105,7 @@ class DistrictTable extends Component {
                   <ValueCell>{formatter(theData.i, '$')}</ValueCell>
                 </tr>
                 <tr>
-                  <td>Avg. State Taxes Paid</td>
+                  <td>Avg. State Taxes Deducted</td>
                   <ValueCell>{formatter(theData.s, '$')}</ValueCell>
                 </tr>
               </tbody>
