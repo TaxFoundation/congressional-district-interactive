@@ -7,6 +7,8 @@ import us from './data/us.json';
 import districts from './data/us-congress-113.json';
 import data from './data/data.json';
 import Legend from './components/Legend';
+import Banner from './components/Banner';
+import SocialButtons from './components/SocialButtons';
 
 const AppWrapper = styled.div`
   color: #333;
@@ -74,6 +76,19 @@ class App extends Component {
   render() {
     return (
       <AppWrapper className="App">
+        <Banner />
+        <h1 style={{ textAlign: 'center' }}>
+          How Could the Tax Cuts and Jobs Act Impact Taxpayers?
+        </h1>
+        <SocialButtons
+          size="30px"
+          message="How will the Tax Cuts and Jobs Act impact after-tax incomes? This map shows you where people are getting tax cuts and by how much."
+          hashtags="TaxReform"
+          emailSubject="Tax Cuts Map"
+          emailBody={`Check out this new interactive map from the Tax Foundation showing how the Tax Cuts and Jobs act affects different regions and income brackets across the US. ${
+            window.location.href
+          }`}
+        />
         <Navigation
           values={this.state}
           updateBucket={this.updateBucket}
