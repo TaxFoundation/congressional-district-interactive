@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
-import HoverContainer from './HoverContainer';
 import DistrictTable from './DistrictTable';
-import Button from './Button';
-import Select from './Select';
 import { colorize } from '../helpers';
 
 const Container = styled.div`
@@ -43,6 +40,7 @@ class StateMap extends Component {
   state = {
     activeDistrict: 0,
     data: null,
+    activeState: this.props.activeState,
   };
 
   updateActiveDistrict = id =>
@@ -61,6 +59,18 @@ class StateMap extends Component {
     this.setState({
       data: this.props.data[activeDistrict][this.props.activeBucket],
     });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.activeState !== prevState.activeState) {
+      if (Object.keys(nextProps.data).length === 1) {
+        return { activeDistrict: 0, activeState: nextProps.activeState };
+      } else {
+        return { activeDistrict: 1, activeState: nextProps.activeState };
+      }
+    } else {
+      return null;
+    }
   }
 
   render() {

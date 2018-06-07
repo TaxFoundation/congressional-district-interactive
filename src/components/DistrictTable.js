@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import Select from './Select';
@@ -43,44 +43,34 @@ const ValueCell = styled.td`
   text-align: right;
 `;
 
-class DistrictTable extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    let theData = { i: '', s: '', t: '' };
-    let bucketText = '';
-    let theDistrict =
-      Object.keys(this.props.data).length > 1 && this.props.activeDistrict === 0
-        ? 1
-        : this.props.activeDistrict;
-    if (
-      this.props.data &&
-      this.props.activeBucket >= 0 &&
-      this.props.activeDistrict >= 0
-    ) {
-      theData = this.props.data[theDistrict][this.props.activeBucket];
-      bucketText = BUCKETS.find(b => +b.id === +this.props.activeBucket).value;
-    }
+const DistrictTable = props => {
+  let theData = { i: '', s: '', t: '' };
+  let bucketText = '';
+  let theDistrict =
+    Object.keys(props.data).length > 1 && props.activeDistrict === 0
+      ? 1
+      : props.activeDistrict;
+  if (props.data && props.activeBucket >= 0 && props.activeDistrict >= 0) {
+    theData = props.data[theDistrict][props.activeBucket];
+    bucketText = BUCKETS.find(b => +b.id === +props.activeBucket).value;
 
     return (
       <StyledDistrictTable>
         <div>
-          {Object.keys(this.props.data).length > 1 ? (
+          {Object.keys(props.data).length > 1 ? (
             <Select
               name="district"
               id="district"
-              value={this.props.activeDistrict}
-              onChange={e => this.props.updateActiveDistrict(e.target.value)}
+              value={props.activeDistrict}
+              onChange={e => props.updateActiveDistrict(e.target.value)}
             >
-              {Object.keys(this.props.data).map(d => (
+              {Object.keys(props.data).map(d => (
                 <option key={`district-opt-${d}`} value={+d}>
                   {`District ${d}`}
                 </option>
               ))}
             </Select>
-          ) : this.props.activeState === 11 ? (
+          ) : props.activeState === 11 ? (
             <h3 style={{ textAlign: 'center' }}>District of Columbia</h3>
           ) : (
             <h3 style={{ textAlign: 'center' }}>At-Large District</h3>
@@ -114,13 +104,13 @@ class DistrictTable extends Component {
         </div>
         <Button
           style={{ alignSelf: 'end' }}
-          onClick={e => this.props.updateActiveState(0)}
+          onClick={e => props.updateActiveState(0)}
         >
           Go Back to US Map
         </Button>
       </StyledDistrictTable>
     );
   }
-}
+};
 
 export default DistrictTable;
