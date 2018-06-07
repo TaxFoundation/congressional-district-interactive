@@ -46,7 +46,7 @@ const ValueCell = styled.td`
 const DistrictTable = props => {
   let theData = { i: '', s: '', t: '' };
   let bucketText = '';
-  if (props.data && props.activeBucket && props.activeDistrict) {
+  if (props.data && props.activeBucket >= 0 && props.activeDistrict >= 0) {
     theData = props.data[props.activeDistrict][props.activeBucket];
     bucketText = BUCKETS.find(b => +b.id === +props.activeBucket).value;
   }
