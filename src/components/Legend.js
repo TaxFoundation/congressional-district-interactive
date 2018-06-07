@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { colorize } from '../helpers';
 
@@ -26,8 +26,19 @@ const LegendStop = styled.div`
 const Legend = props => (
   <LegendContainer steps={props.steps}>
     <LegendText textAlign="right">
-      {`${100 * Math.abs(props.domain[0])}% or More`}
-      <br />Increase
+      {props.domain[0] < 0 ? (
+        <Fragment>
+          `${100 * Math.abs(props.domain[0])}% or More`<br />Increase
+        </Fragment>
+      ) : props.domain[0] === 0 ? (
+        <Fragment>
+          No<br />Change
+        </Fragment>
+      ) : (
+        <Fragment>
+          `${100 * Math.abs(props.domain[0])}%`<br />Cut
+        </Fragment>
+      )}
     </LegendText>
     {[...Array(props.steps).keys()].map(k => (
       <LegendStop key={`legend-${k}`} steps={props.steps} step={k} />
