@@ -10,7 +10,8 @@ export const colorize = (value, domain) => {
       '#1d91c0',
       '#225ea8',
       '#253494',
-      '#081d58',
+      '#421496',
+      '#330963',
     ])
     .domain(domain)(value);
 };
