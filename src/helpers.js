@@ -12,6 +12,7 @@ export const colorize = (value, domain) => {
       '#253494',
       '#421496',
       '#330963',
+      '#210433',
     ])
     .domain(domain)(value);
 };
