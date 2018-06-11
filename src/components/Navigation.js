@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import HoverContainer from './HoverContainer';
 import Select from './Select';
 import BUCKETS from '../data/buckets.js';
 import STATES from '../data/states';
@@ -34,7 +35,13 @@ const NavSectionHeading = styled.h2`
 const BucketSeclection = props => {
   return (
     <div>
-      <NavSectionHeading>Choose Income Level</NavSectionHeading>
+      <NavSectionHeading>
+        Choose{' '}
+        <span data-for="agi-label" data-tip>
+          AGI
+        </span>{' '}
+        Range
+      </NavSectionHeading>
       <div>
         <Select
           name="income"
@@ -49,6 +56,7 @@ const BucketSeclection = props => {
           ))}
         </Select>
       </div>
+      <HoverContainer id="agi-label">Adjusted Gross Income</HoverContainer>
     </div>
   );
 };

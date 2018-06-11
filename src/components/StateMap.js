@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import HoverContainer from './HoverContainer';
 import { geoAlbersUsa, geoMercator, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import DistrictTable from './DistrictTable';
@@ -138,6 +139,8 @@ class StateMap extends Component {
               }`}
             >
               <BG
+                data-tip
+                data-for="go-back"
                 height={this.props.scale.yScale}
                 width={this.props.scale.xScale}
                 onClick={e => this.props.updateActiveState(0)}
@@ -153,6 +156,9 @@ class StateMap extends Component {
               updateActiveState={this.props.updateActiveState}
             />
           </Container>
+          <HoverContainer id="go-back">
+            Click to return to US map.
+          </HoverContainer>
         </Fragment>
       );
     }

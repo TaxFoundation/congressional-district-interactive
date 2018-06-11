@@ -37,6 +37,14 @@ const Table = styled.table`
   }
 `;
 
+const BackToMap = styled.p`
+  color: #0094ff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem;
+  text-align: center;
+`;
+
 const ValueCell = styled.td`
   color: ${props => (props.color ? props.color : '#333')};
   font-family: 'Roboto Mono', monospace;
@@ -57,6 +65,9 @@ const DistrictTable = props => {
     return (
       <StyledDistrictTable>
         <div>
+          <BackToMap onClick={e => props.updateActiveState(0)}>
+            ← Back to US Map
+          </BackToMap>
           {Object.keys(props.data).length > 1 ? (
             <Select
               name="district"
@@ -94,19 +105,16 @@ const DistrictTable = props => {
                   <td>{`Avg. Income from ${bucketText}`}</td>
                   <ValueCell>{formatter(theData.i, '$')}</ValueCell>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td>Avg. State Taxes Deducted</td>
                   <ValueCell>{formatter(theData.s, '$')}</ValueCell>
-                </tr>
+                </tr> */}
               </tbody>
             </Table>
           ) : null}
         </div>
-        <Button
-          style={{ alignSelf: 'end' }}
-          onClick={e => props.updateActiveState(0)}
-        >
-          Go Back to US Map
+        <Button href="#" style={{ alignSelf: 'end' }}>
+          Full Methodology
         </Button>
       </StyledDistrictTable>
     );
