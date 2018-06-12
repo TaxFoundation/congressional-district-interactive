@@ -113,6 +113,9 @@ const DistrictTable = props => {
             </Table>
           ) : null}
         </div>
+        <p>
+          Not sure what district you live in? <a style={{color: '#0094ff'}} href="https://www.census.gov/mycd/" target="_blank">Find out here.</a>
+        </p>
         <Button href="#" style={{ alignSelf: 'end' }}>
           Full Methodology
         </Button>

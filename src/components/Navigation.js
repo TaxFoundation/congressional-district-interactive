@@ -32,15 +32,29 @@ const NavSectionHeading = styled.h2`
   width: 100%;
 `;
 
+const Tooltip = styled.span`
+  background-color: #e6f4ff;
+  border: 1px solid #0094ff;
+  border-radius: 2px;
+  color: #0094ff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.8rem;
+  line-height: 1;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.3rem;
+  position: relative;
+  top: -0.25rem;
+`;
+
 const BucketSeclection = props => {
   return (
     <div>
       <NavSectionHeading>
-        Choose{' '}
-        <span data-for="agi-label" data-tip>
-          AGI
-        </span>{' '}
-        Range
+        Choose AGI Range{' '}
+        <Tooltip data-for="agi-label" data-tip>
+          ?
+        </Tooltip>
       </NavSectionHeading>
       <div>
         <Select
@@ -56,7 +70,7 @@ const BucketSeclection = props => {
           ))}
         </Select>
       </div>
-      <HoverContainer id="agi-label">Adjusted Gross Income</HoverContainer>
+      <HoverContainer id="agi-label">Adjusted Gross Income: your gross income minus certain deductions, such as education expenses and health savings account contributions.</HoverContainer>
     </div>
   );
 };
