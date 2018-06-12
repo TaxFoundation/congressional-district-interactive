@@ -116,7 +116,7 @@ const DistrictTable = props => {
         <p>
           Not sure what district you live in? <a style={{color: '#0094ff'}} href="https://www.census.gov/mycd/" target="_blank">Find out here.</a>
         </p>
-        <Button href="#" style={{ alignSelf: 'end' }}>
+        <Button href="https://taxfoundation.org/2018-tax-reform-congressional-district-map-explainer/" style={{ alignSelf: 'end' }}>
           Full Methodology
         </Button>
       </StyledDistrictTable>
