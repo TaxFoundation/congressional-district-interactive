@@ -16,15 +16,18 @@ const StyledDistrictTable = styled.div`
 
 const Table = styled.table`
   border-collapse: collapse;
-  font-size: 0.8rem;
+  font-size: 0.8rem !important;
   width: 100%;
 
-  tr:first-child {
-    font-size: 1.2rem;
+  tr:first-child > td {
+    font-size: 1.2rem !important;
   }
 
   tr > td {
+    background: #fff;
+    border-right: none;
     border-bottom: 1px solid #ccc;
+    font-family: 'Lato', sans-serif !important;
     padding: 0.5rem 0;
 
     &:last-child {
@@ -47,7 +50,7 @@ const BackToMap = styled.p`
 
 const ValueCell = styled.td`
   color: ${props => (props.color ? props.color : '#333')};
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Roboto Mono', monospace !important;
   text-align: right;
 `;
 
