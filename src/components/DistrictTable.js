@@ -7,12 +7,17 @@ import SocialButtons from './SocialButtons';
 import BUCKETS from '../data/buckets';
 
 const StyledDistrictTable = styled.div`
+  background-color: #fff;
   border: 1px solid #999;
   border-radius: 4px;
   display: grid;
   grid-gap: 0.5rem;
   height: 100%;
   padding: 1rem;
+
+  p {
+    margin: 0;
+  }
 `;
 
 const Table = styled.table`
@@ -117,7 +122,7 @@ const DistrictTable = props => {
             </Table>
           ) : null}
         </div>
-        <p>
+        <p style={{ fontSize: '0.8rem' }}>
           Not sure what district you live in?{' '}
           <a
             style={{ color: '#0094ff' }}
@@ -127,15 +132,17 @@ const DistrictTable = props => {
             Find out here.
           </a>
         </p>
-        <p
-          style={{
-            marginBottom: '8px',
-            textAlign: 'center',
-          }}
-        >
-          Share with your friends!
-        </p>
-        <SocialButtons />
+        <div>
+          <p
+            style={{
+              marginBottom: '8px',
+              textAlign: 'center',
+            }}
+          >
+            Share with your friends!
+          </p>
+          <SocialButtons />
+        </div>
         <Button
           href="https://taxfoundation.org/2018-tax-reform-congressional-district-map-explainer/"
           style={{ alignSelf: 'end' }}
