@@ -31,7 +31,7 @@ const ShareIcons = {
           (props.hashtags ? '&hashtags=' + props.hashtags : '') +
           (props.noVia ? '' : '&via=taxfoundation') +
           '&url=' +
-          encodeURI(window.location.href)
+          'https://taxfoundation.org/2018-tax-reform-congressional-districts-map/'
         }
         target="_blank"
         height={props.height}
@@ -53,9 +53,9 @@ const ShareIcons = {
         fill={props.fill}
         href={
           'https://www.facebook.com/dialog/share?app_id=1667818153232107&display=page&href=' +
-          encodeURI(window.location.href) +
+          'https://taxfoundation.org/2018-tax-reform-congressional-districts-map/' +
           '&redirect_uri=' +
-          encodeURI(window.location.href)
+          'https://taxfoundation.org/2018-tax-reform-congressional-districts-map/'
         }
         target="_blank"
         height={props.height}
@@ -77,7 +77,7 @@ const ShareIcons = {
         fill={props.fill}
         href={
           'https://www.linkedin.com/shareArticle?mini=true&url=' +
-          encodeURI(window.location.href) +
+          'https://taxfoundation.org/2018-tax-reform-congressional-districts-map/' +
           (props.message ? '&summary=' + encodeURI(props.message) : '')
         }
         target="_blank"
