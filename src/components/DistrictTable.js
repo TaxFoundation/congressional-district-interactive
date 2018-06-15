@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from './Button';
 import Select from './Select';
 import { formatter } from '../helpers';
+import SocialButtons from './SocialButtons';
 import BUCKETS from '../data/buckets';
 
 const StyledDistrictTable = styled.div`
@@ -117,9 +118,28 @@ const DistrictTable = props => {
           ) : null}
         </div>
         <p>
-          Not sure what district you live in? <a style={{color: '#0094ff'}} href="https://www.census.gov/mycd/" target="_blank">Find out here.</a>
+          Not sure what district you live in?{' '}
+          <a
+            style={{ color: '#0094ff' }}
+            href="https://www.census.gov/mycd/"
+            target="_blank"
+          >
+            Find out here.
+          </a>
         </p>
-        <Button href="https://taxfoundation.org/2018-tax-reform-congressional-district-map-explainer/" style={{ alignSelf: 'end' }}>
+        <p
+          style={{
+            marginBottom: '8px',
+            textAlign: 'center',
+          }}
+        >
+          Share with your friends!
+        </p>
+        <SocialButtons />
+        <Button
+          href="https://taxfoundation.org/2018-tax-reform-congressional-district-map-explainer/"
+          style={{ alignSelf: 'end' }}
+        >
           Full Methodology
         </Button>
       </StyledDistrictTable>
