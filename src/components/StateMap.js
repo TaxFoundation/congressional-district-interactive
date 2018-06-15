@@ -47,7 +47,6 @@ class StateMap extends Component {
     });
 
   componentDidMount() {
-    console.log(this.buckets);
     let activeDistrict = 0;
     if (Object.keys(this.props.data).length > 1) {
       activeDistrict = 1;
