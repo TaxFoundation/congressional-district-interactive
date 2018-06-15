@@ -70,7 +70,10 @@ const BucketSeclection = props => {
           ))}
         </Select>
       </div>
-      <HoverContainer id="agi-label">Adjusted Gross Income: your gross income minus certain deductions, such as education expenses and health savings account contributions.</HoverContainer>
+      <HoverContainer place="bottom" id="agi-label">
+        Adjusted Gross Income: your gross income minus certain deductions, such
+        as education expenses and health savings account contributions.
+      </HoverContainer>
     </div>
   );
 };
