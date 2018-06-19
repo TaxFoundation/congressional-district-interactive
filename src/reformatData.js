@@ -1,10 +1,7 @@
 const fs = require('fs');
 const d3Dsv = require('d3-dsv');
 
-const input = './src/data/data.csv';
-const output = './src/data/data.json';
-
-const updateData = () => {
+const updateData = (input, output) => {
   try {
     //read the data
     const rawData = fs.readFileSync(input, 'utf8');
@@ -33,9 +30,9 @@ const updateData = () => {
   }
 };
 
-const beginTheWatch = () => {
+const beginTheWatch = (input, output) => {
   console.log('Inital new data building.');
-  updateData();
+  updateData(input, output);
   if (process.argv.includes('--watch')) {
     console.log('Watching for new changes...');
     fs.watch(
@@ -45,19 +42,22 @@ const beginTheWatch = () => {
       },
       (event, file) => {
         console.log('Updating data...');
-        updateData();
+        updateData(input, output);
       }
     );
   }
 };
+
+const input = './src/data/data.csv';
+const output = './src/data/data.json';
 
 if (fs.existsSync(output)) {
   console.log('Removing old data.');
   fs.unlink(output, err => {
     if (err) throw err;
     console.log('Old data deleted.');
-    beginTheWatch();
+    beginTheWatch(input, output);
   });
 } else {
-  beginTheWatch();
+  beginTheWatch(input, output);
 }
