@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import HoverContainer from './HoverContainer';
-import { colorize } from '../helpers';
+import { colorize, formatter } from '../helpers';
 import STATES from '../data/states';
 
 const State = styled.path`
@@ -19,6 +19,12 @@ const State = styled.path`
     stroke-width: 2;
   }
 `;
+
+const hoverText = (name, info) =>
+  `<p><strong>${name}</strong></p><p>Average Tax Cut: ${formatter(
+    info,
+    '$'
+  )}</p>`;
 
 const District = styled.path.attrs({
   fill: props => (props.theColor ? props.theColor : '#333'),
@@ -78,8 +84,13 @@ class USMap extends Component {
       return (
         <State
           d={path(d)}
-          data-tip={stateInfo ? stateInfo.name : null}
+          data-tip={
+            stateInfo
+              ? hoverText(stateInfo.name, stateInfo[this.props.activeBucket].t)
+              : null
+          }
           data-for="usmap"
+          data-html={true}
           key={`state-${d.id}`}
           onClick={e => {
             this.props.updateActiveState(d.id);
