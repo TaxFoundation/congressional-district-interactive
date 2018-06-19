@@ -18,5 +18,9 @@ export const colorize = (value, domain) => {
 };
 
 export const formatter = (number, type) => {
-  return type === '$' ? format('$,')(number) : format('.1%')(number);
+  return type === '%'
+    ? format('.1%')(number)
+    : number % 1 > 0
+      ? format('$,.2f')(number)
+      : format('$,')(number);
 };
