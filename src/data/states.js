@@ -10,6 +10,7 @@ const STATES = [
     id: 1,
     abbr: 'AL',
     name: 'Alabama',
+    jobs: 2941,
   },
   {
     0: { i: 4836, t: 21.71 },
@@ -22,6 +23,7 @@ const STATES = [
     id: 2,
     abbr: 'AK',
     name: 'Alaska',
+    jobs: 476,
   },
   {
     0: { i: 5467, t: 21.37 },
@@ -34,6 +36,7 @@ const STATES = [
     id: 4,
     abbr: 'AZ',
     name: 'Arizona',
+    jobs: 4098,
   },
   {
     0: { i: 5474, t: 22.97 },
@@ -46,6 +49,7 @@ const STATES = [
     id: 5,
     abbr: 'AR',
     name: 'Arkansas',
+    jobs: 1800,
   },
   {
     0: { i: 5414, t: 18.54 },
@@ -58,6 +62,7 @@ const STATES = [
     id: 6,
     abbr: 'CA',
     name: 'California',
+    jobs: 24701,
   },
   {
     0: { i: 5194, t: 20.41 },
@@ -70,6 +75,7 @@ const STATES = [
     id: 8,
     abbr: 'CO',
     name: 'Colorado',
+    jobs: 3936,
   },
   {
     0: { i: 5004, t: 19.08 },
@@ -82,6 +88,7 @@ const STATES = [
     id: 9,
     abbr: 'CT',
     name: 'Connecticut',
+    jobs: 2444,
   },
   {
     0: { i: 5290, t: 16.15 },
@@ -94,6 +101,7 @@ const STATES = [
     id: 10,
     abbr: 'DE',
     name: 'Delaware',
+    jobs: 666,
   },
   {
     0: { i: 5437, t: 21.09 },
@@ -106,6 +114,7 @@ const STATES = [
     id: 11,
     abbr: 'DC',
     name: 'District of Columbia',
+    jobs: 1154,
   },
   {
     0: { i: 5439, t: 20.12 },
@@ -118,6 +127,7 @@ const STATES = [
     id: 12,
     abbr: 'FL',
     name: 'Florida',
+    jobs: 12642,
   },
   {
     0: { i: 5495, t: 21.14 },
@@ -130,6 +140,7 @@ const STATES = [
     id: 13,
     abbr: 'GA',
     name: 'Georgia',
+    jobs: 6526,
   },
   {
     0: { i: 4972, t: 17.41 },
@@ -142,6 +153,7 @@ const STATES = [
     id: 15,
     abbr: 'HI',
     name: 'Hawaii',
+    jobs: 959,
   },
   {
     0: { i: 5262, t: 20.28 },
@@ -154,6 +166,7 @@ const STATES = [
     id: 16,
     abbr: 'ID',
     name: 'Idaho',
+    jobs: 1063,
   },
   {
     0: { i: 5163, t: 18.89 },
@@ -166,6 +179,7 @@ const STATES = [
     id: 17,
     abbr: 'IL',
     name: 'Illinois',
+    jobs: 8830,
   },
   {
     0: { i: 5086, t: 18.18 },
@@ -178,6 +192,7 @@ const STATES = [
     id: 18,
     abbr: 'IN',
     name: 'Indiana',
+    jobs: 4529,
   },
   {
     0: { i: 5314, t: 17.12 },
@@ -190,6 +205,7 @@ const STATES = [
     id: 19,
     abbr: 'IA',
     name: 'Iowa',
+    jobs: 2293,
   },
   {
     0: { i: 5063, t: 19.39 },
@@ -202,6 +218,7 @@ const STATES = [
     id: 20,
     abbr: 'KS',
     name: 'Kansas',
+    jobs: 2052,
   },
   {
     0: { i: 5329, t: 21.91 },
@@ -214,6 +231,7 @@ const STATES = [
     id: 21,
     abbr: 'KY',
     name: 'Kentucky',
+    jobs: 2793,
   },
   {
     0: { i: 5579, t: 21.53 },
@@ -226,6 +244,7 @@ const STATES = [
     id: 22,
     abbr: 'LA',
     name: 'Louisiana',
+    jobs: 2879,
   },
   {
     0: { i: 5127, t: 18.24 },
@@ -238,6 +257,7 @@ const STATES = [
     id: 23,
     abbr: 'ME',
     name: 'Maine',
+    jobs: 911,
   },
   {
     0: { i: 4883, t: 15.68 },
@@ -250,6 +270,7 @@ const STATES = [
     id: 24,
     abbr: 'MD',
     name: 'Maryland',
+    jobs: 3952,
   },
   {
     0: { i: 4994, t: 16.42 },
@@ -262,6 +283,7 @@ const STATES = [
     id: 25,
     abbr: 'MA',
     name: 'Massachusetts',
+    jobs: 5279,
   },
   {
     0: { i: 4878, t: 16.37 },
@@ -274,6 +296,7 @@ const STATES = [
     id: 26,
     abbr: 'MI',
     name: 'Michigan',
+    jobs: 6396,
   },
   {
     0: { i: 4968, t: 14.86 },
@@ -286,6 +309,7 @@ const STATES = [
     id: 27,
     abbr: 'MN',
     name: 'Minnesota',
+    jobs: 4271,
   },
   {
     0: { i: 5697, t: 22.85 },
@@ -298,6 +322,7 @@ const STATES = [
     id: 28,
     abbr: 'MS',
     name: 'Mississippi',
+    jobs: 1683,
   },
   {
     0: { i: 5060, t: 19.55 },
@@ -310,6 +335,7 @@ const STATES = [
     id: 29,
     abbr: 'MO',
     name: 'Missouri',
+    jobs: 4184,
   },
   {
     0: { i: 5115, t: 22.24 },
@@ -322,6 +348,7 @@ const STATES = [
     id: 30,
     abbr: 'MT',
     name: 'Montana',
+    jobs: 687,
   },
   {
     0: { i: 5199, t: 18.18 },
@@ -334,6 +361,7 @@ const STATES = [
     id: 31,
     abbr: 'NE',
     name: 'Nebraska',
+    jobs: 1489,
   },
   {
     0: { i: 5439, t: 18.16 },
@@ -346,6 +374,7 @@ const STATES = [
     id: 32,
     abbr: 'NV',
     name: 'Nevada',
+    jobs: 1986,
   },
   {
     0: { i: 4969, t: 15.01 },
@@ -358,6 +387,7 @@ const STATES = [
     id: 33,
     abbr: 'NH',
     name: 'New Hampshire',
+    jobs: 991,
   },
   {
     0: { i: 5046, t: 18.87 },
@@ -370,6 +400,7 @@ const STATES = [
     id: 34,
     abbr: 'NJ',
     name: 'New Jersey',
+    jobs: 6041,
   },
   {
     0: { i: 5089, t: 20.74 },
@@ -382,6 +413,7 @@ const STATES = [
     id: 35,
     abbr: 'NM',
     name: 'New Mexico',
+    jobs: 1217,
   },
   {
     0: { i: 5240, t: 19.78 },
@@ -394,6 +426,7 @@ const STATES = [
     id: 36,
     abbr: 'NY',
     name: 'New York',
+    jobs: 13897,
   },
   {
     0: { i: 5359, t: 22 },
@@ -406,6 +439,7 @@ const STATES = [
     id: 37,
     abbr: 'NC',
     name: 'North Carolina',
+    jobs: 6507,
   },
   {
     0: { i: 5271, t: 15.41 },
@@ -418,6 +452,7 @@ const STATES = [
     id: 38,
     abbr: 'ND',
     name: 'North Dakota',
+    jobs: 622,
   },
   {
     0: { i: 5186, t: 17.49 },
@@ -430,6 +465,7 @@ const STATES = [
     id: 39,
     abbr: 'OH',
     name: 'Ohio',
+    jobs: 8092,
   },
   {
     0: { i: 5304, t: 21.35 },
@@ -442,6 +478,7 @@ const STATES = [
     id: 40,
     abbr: 'OK',
     name: 'Oklahoma',
+    jobs: 2433,
   },
   {
     0: { i: 5260, t: 19.02 },
@@ -454,6 +491,7 @@ const STATES = [
     id: 41,
     abbr: 'OR',
     name: 'Oregon',
+    jobs: 2763,
   },
   {
     0: { i: 4888, t: 18.47 },
@@ -466,6 +504,7 @@ const STATES = [
     id: 42,
     abbr: 'PA',
     name: 'Pennsylvania',
+    jobs: 8693,
   },
   {
     0: { i: 5135, t: 15.46 },
@@ -478,6 +517,7 @@ const STATES = [
     id: 44,
     abbr: 'RI',
     name: 'Rhode Island',
+    jobs: 723,
   },
   {
     0: { i: 5371, t: 19.88 },
@@ -490,6 +530,7 @@ const STATES = [
     id: 45,
     abbr: 'SC',
     name: 'South Carolina',
+    jobs: 3068,
   },
   {
     0: { i: 5067, t: 17.04 },
@@ -502,6 +543,7 @@ const STATES = [
     id: 46,
     abbr: 'SD',
     name: 'South Dakota',
+    jobs: 637,
   },
   {
     0: { i: 5392, t: 20.03 },
@@ -514,6 +556,7 @@ const STATES = [
     id: 47,
     abbr: 'TN',
     name: 'Tennessee',
+    jobs: 4419,
   },
   {
     0: { i: 5319, t: 18.61 },
@@ -526,6 +569,7 @@ const STATES = [
     id: 48,
     abbr: 'TX',
     name: 'Texas',
+    jobs: 18128,
   },
   {
     0: { i: 5165, t: 14.69 },
@@ -538,6 +582,7 @@ const STATES = [
     id: 49,
     abbr: 'UT',
     name: 'Utah',
+    jobs: 2187,
   },
   {
     0: { i: 4914, t: 21.38 },
@@ -550,6 +595,7 @@ const STATES = [
     id: 50,
     abbr: 'VT',
     name: 'Vermont',
+    jobs: 455,
   },
   {
     0: { i: 5209, t: 18.3 },
@@ -562,6 +608,7 @@ const STATES = [
     id: 51,
     abbr: 'VA',
     name: 'Virginia',
+    jobs: 5782,
   },
   {
     0: { i: 5178, t: 18.19 },
@@ -574,6 +621,7 @@ const STATES = [
     id: 53,
     abbr: 'WA',
     name: 'Washington',
+    jobs: 4931,
   },
   {
     0: { i: 5194, t: 22.1 },
@@ -586,6 +634,7 @@ const STATES = [
     id: 54,
     abbr: 'WV',
     name: 'West Virginia',
+    jobs: 1099,
   },
   {
     0: { i: 5007, t: 18.21 },
@@ -598,6 +647,7 @@ const STATES = [
     id: 55,
     abbr: 'WI',
     name: 'Wisconsin',
+    jobs: 4284,
   },
   {
     0: { i: 5133, t: 21.11 },
@@ -610,6 +660,7 @@ const STATES = [
     id: 56,
     abbr: 'WY',
     name: 'Wyoming',
+    jobs: 413,
   },
 ];
 

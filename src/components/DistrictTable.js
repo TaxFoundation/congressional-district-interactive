@@ -128,6 +128,7 @@ const DistrictTable = props => {
             style={{ color: '#0094ff' }}
             href="https://www.census.gov/mycd/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Find out here.
           </a>

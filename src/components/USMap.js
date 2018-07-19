@@ -20,11 +20,18 @@ const State = styled.path`
   }
 `;
 
-const hoverText = (name, info) =>
-  `<p><strong>${name}</strong></p><p>Average Tax Cut: ${formatter(
-    info,
-    '$'
-  )}</p>`;
+const hoverText = (name, info, jobs) =>
+  `<p style="text-align:center; border-bottom: 1px solid #ddd; padding-bottom: 9px; margin-bottom: 9px;"><strong>${name}</strong></p>
+   <table><tbody>
+   <tr><td>Average Tax Cut:</td><td style="text-align: right">${formatter(
+     info,
+     '$'
+   )}</td></tr>
+   <tr><td>Est. Jobs Added in 2018:</td><td style="text-align: right">${formatter(
+     jobs,
+     ','
+   )}</td></tr>
+   </tbody></table>`;
 
 const District = styled.path.attrs({
   fill: props => (props.theColor ? props.theColor : '#333'),
@@ -86,7 +93,11 @@ class USMap extends Component {
           d={path(d)}
           data-tip={
             stateInfo
-              ? hoverText(stateInfo.name, stateInfo[this.props.activeBucket].t)
+              ? hoverText(
+                  stateInfo.name,
+                  stateInfo[this.props.activeBucket].t,
+                  stateInfo.jobs
+                )
               : null
           }
           data-for="usmap"

@@ -83,7 +83,9 @@ class App extends Component {
         </h2>
         <SocialButtons
           size="30px"
-          message="How will the Tax Cuts and Jobs Act impact incomes in your congressional district? Check out this new interactive map. ${window.location.href}"
+          message={`How will the Tax Cuts and Jobs Act impact incomes in your congressional district? Check out this new interactive map. ${
+            window.location.href
+          }`}
           hashtags="TaxReform"
           emailSubject="Mapping 2018 Tax Reform"
           emailBody={`The Tax Foundation's 2018 tax reform map shows you how the Tax Cuts and Jobs Act will impact average incomes in congressional districts around the country. You can see the impact on your district here: ${
