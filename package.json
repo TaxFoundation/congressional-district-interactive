@@ -19,6 +19,7 @@
   "scripts": {
     "start": "concurrently -c \"magenta,cyan\" --names \"Data,React\" \"npm run watch-data\" \"react-scripts start\"",
     "build": "npm run build-data && react-scripts build",
+    "build-tf": "npm run build-data && REACT_APP_ENV=taxfoundation react-scripts build",
     "build-data": "node ./src/reformatData.js",
     "watch-data": "node ./src/reformatData.js --watch",
     "test": "react-scripts test --env=jsdom",

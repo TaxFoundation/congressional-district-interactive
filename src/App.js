@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import Navigation from './components/Navigation';
 import USMap from './components/USMap';
@@ -66,8 +66,12 @@ class App extends Component {
   }
 
   async getStateData(stateId) {
+    const tfUrl =
+      'https://static.taxfoundation.org/congressional-districts-2018/';
     const response = await fetch(
-      `states/${stateId < 10 ? `0${stateId}` : stateId}.json`
+      `${process.env.REACT_APP_ENV === 'taxfoundation' ? tfUrl : ''}states/${
+        stateId < 10 ? `0${stateId}` : stateId
+      }.json`
     );
     const data = await response.json();
     return data;
@@ -76,22 +80,26 @@ class App extends Component {
   render() {
     return (
       <AppWrapper className="App">
-        <Banner />
-        <h1 style={{ textAlign: 'center' }}>Mapping 2018 Tax Reform</h1>
-        <h2 style={{ textAlign: 'center' }}>
-          The Impact of the Tax Cuts and Jobs Act by Congressional District
-        </h2>
-        <SocialButtons
-          size="30px"
-          message={`How will the Tax Cuts and Jobs Act impact incomes in your congressional district? Check out this new interactive map. ${
-            window.location.href
-          }`}
-          hashtags="TaxReform"
-          emailSubject="Mapping 2018 Tax Reform"
-          emailBody={`The Tax Foundation's 2018 tax reform map shows you how the Tax Cuts and Jobs Act will impact average incomes in congressional districts around the country. You can see the impact on your district here: ${
-            window.location.href
-          }`}
-        />
+        {process.env.REACT_APP_ENV === 'taxfoundation' ? null : (
+          <Fragment>
+            <Banner />
+            <h1 style={{ textAlign: 'center' }}>Mapping 2018 Tax Reform</h1>
+            <h2 style={{ textAlign: 'center' }}>
+              The Impact of the Tax Cuts and Jobs Act by Congressional District
+            </h2>
+            <SocialButtons
+              size="30px"
+              message={`How will the Tax Cuts and Jobs Act impact incomes in your congressional district? Check out this new interactive map. ${
+                window.location.href
+              }`}
+              hashtags="TaxReform"
+              emailSubject="Mapping 2018 Tax Reform"
+              emailBody={`The Tax Foundation's 2018 tax reform map shows you how the Tax Cuts and Jobs Act will impact average incomes in congressional districts around the country. You can see the impact on your district here: ${
+                window.location.href
+              }`}
+            />
+          </Fragment>
+        )}
         <Navigation
           values={this.state}
           updateBucket={this.updateBucket}
