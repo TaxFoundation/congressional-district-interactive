@@ -23,14 +23,14 @@ const State = styled.path`
 const hoverText = (name, info, jobs) => `
   <p style="text-align:center; border-bottom: 1px solid #ddd; padding-bottom: 9px; margin-bottom: 9px;"><strong>${name}</strong></p>
   <table><tbody>
-  <tr><td>Average Tax Cut:</td><td style="text-align: right">${formatter(
-    info,
-    '$'
-  )}</td></tr>
-  <tr><td>Est. Jobs Added in 2018:</td><td style="text-align: right">${formatter(
-    jobs,
-    ','
-  )}</td></tr>
+  <tr style="background:transparent">
+    <td style="border: none">Average Tax Cut:</td>
+    <td style="border: none; text-align: right;">${formatter(info, '$')}</td>
+  </tr>
+  <tr style="background:transparent">
+    <td style="border: none">Est. Jobs Added in 2018:</td>
+    <td style="border: none; text-align: right;">${formatter(jobs, ',')}</td>
+  </tr>
   </tbody></table>`;
 
 const District = styled.path.attrs({
