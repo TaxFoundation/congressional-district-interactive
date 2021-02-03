@@ -17,9 +17,7 @@ const Container = styled.div`
   }
 `;
 
-const District = styled.path.attrs({
-  fill: props => (props.theColor ? props.theColor : '#333'),
-})`
+const District = styled.path`
   cursor: pointer;
   stroke: #fff;
   stroke-width: ${props => (props.active ? 1.5 : 0.5)};
@@ -76,41 +74,35 @@ class StateMap extends Component {
       const districtsFeatures = feature(
         this.props.stateData,
         this.props.stateData.objects[
-          this.props.activeState < 10
-            ? `0${this.props.activeState}`
-            : this.props.activeState
-        ]
+          this.props.activeState < 10 ? `0${this.props.activeState}` : this.props.activeState
+        ],
       );
 
       const path = geoPath().projection(
         geoMercator().fitSize(
           [this.props.scale.xScale, this.props.scale.yScale],
-          districtsFeatures
-        )
+          districtsFeatures,
+        ),
       );
 
       const altPath = geoPath().projection(
         geoAlbersUsa().fitSize(
           [this.props.scale.xScale, this.props.scale.yScale],
-          districtsFeatures
-        )
+          districtsFeatures,
+        ),
       );
 
       const districtShapes = districtsFeatures.features.map(d => {
         const districtId = +d.properties.CD114FP;
         if (this.props.data[districtId]) {
-          const districtData = this.props.data[districtId][
-            this.props.activeBucket
-          ];
+          const districtData = this.props.data[districtId][this.props.activeBucket];
 
           return (
             <District
               d={
-                this.props.activeState === 2 || this.props.activeState === 15
-                  ? altPath(d)
-                  : path(d)
+                this.props.activeState === 2 || this.props.activeState === 15 ? altPath(d) : path(d)
               }
-              theColor={
+              fill={
                 districtData && districtData.i
                   ? colorize(districtData.t / districtData.i, this.props.domain)
                   : '#888'
@@ -118,9 +110,7 @@ class StateMap extends Component {
               id={`district-detail-${d.properties.CD114FP}`}
               key={`district-detail-${d.properties.CD114FP}`}
               active={+districtId === +this.state.activeDistrict}
-              onMouseOver={e =>
-                districtId > 0 ? this.updateActiveDistrict(districtId) : null
-              }
+              onMouseOver={e => (districtId > 0 ? this.updateActiveDistrict(districtId) : null)}
             />
           );
         } else {
@@ -131,12 +121,7 @@ class StateMap extends Component {
       return (
         <Fragment>
           <Container>
-            <svg
-              width="100%"
-              viewBox={`0 0 ${this.props.scale.xScale} ${
-                this.props.scale.yScale
-              }`}
-            >
+            <svg width="100%" viewBox={`0 0 ${this.props.scale.xScale} ${this.props.scale.yScale}`}>
               <BG
                 data-tip
                 data-for="go-back"
@@ -155,9 +140,7 @@ class StateMap extends Component {
               updateActiveState={this.props.updateActiveState}
             />
           </Container>
-          <HoverContainer id="go-back">
-            Click to return to US map.
-          </HoverContainer>
+          <HoverContainer id="go-back">Click to return to US map.</HoverContainer>
         </Fragment>
       );
     }

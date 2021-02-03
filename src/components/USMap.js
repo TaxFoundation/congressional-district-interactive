@@ -33,9 +33,7 @@ const hoverText = (name, info, jobs) => `
   </tr>
   </tbody></table>`;
 
-const District = styled.path.attrs({
-  fill: props => (props.theColor ? props.theColor : '#333'),
-})`
+const District = styled.path`
   stroke: #fff;
   stroke-width: 0.5;
   stroke-linejoin: bevel;
@@ -46,29 +44,22 @@ class USMap extends Component {
     const path = geoPath().projection(
       geoAlbersUsa()
         .scale(this.props.scale.scale)
-        .translate([
-          this.props.scale.xScale / 2,
-          this.props.scale.yScale / 2 - 25,
-        ])
+        .translate([this.props.scale.xScale / 2, this.props.scale.yScale / 2 - 25]),
     );
 
-    const districtsFeatures = feature(
-      this.props.districts,
-      this.props.districts.objects.districts
-    ).features;
+    const districtsFeatures = feature(this.props.districts, this.props.districts.objects.districts)
+      .features;
 
     const districtShapes = districtsFeatures.map(d => {
       const stateId = Math.floor(+d.id / 100);
       const districtId = d.id % 100;
       let districtData;
       if (this.props.data[stateId] && this.props.data[stateId][districtId]) {
-        districtData = this.props.data[stateId][districtId][
-          this.props.activeBucket
-        ];
+        districtData = this.props.data[stateId][districtId][this.props.activeBucket];
         return (
           <District
             d={path(d)}
-            theColor={
+            fill={
               districtData && districtData.i
                 ? colorize(districtData.t / districtData.i, this.props.domain)
                 : '#888'
@@ -82,10 +73,7 @@ class USMap extends Component {
       }
     });
 
-    const states = feature(
-      this.props.us,
-      this.props.us.objects.states
-    ).features.map(d => {
+    const states = feature(this.props.us, this.props.us.objects.states).features.map(d => {
       const stateInfo = STATES.find(s => s.id === +d.id);
 
       return (
@@ -93,11 +81,7 @@ class USMap extends Component {
           d={path(d)}
           data-tip={
             stateInfo
-              ? hoverText(
-                  stateInfo.name,
-                  stateInfo[this.props.activeBucket].t,
-                  stateInfo.jobs
-                )
+              ? hoverText(stateInfo.name, stateInfo[this.props.activeBucket].t, stateInfo.jobs)
               : null
           }
           data-for="usmap"
@@ -112,15 +96,9 @@ class USMap extends Component {
 
     return (
       <Fragment>
-        <svg
-          width="100%"
-          viewBox={`0 0 ${this.props.scale.xScale} ${this.props.scale.yScale}`}
-        >
+        <svg width="100%" viewBox={`0 0 ${this.props.scale.xScale} ${this.props.scale.yScale}`}>
           <defs>
-            <path
-              id="land"
-              d={path(feature(this.props.us, this.props.us.objects.land))}
-            />
+            <path id="land" d={path(feature(this.props.us, this.props.us.objects.land))} />
           </defs>
           <clipPath id="clip-land">
             <use xlinkHref="#land" />
